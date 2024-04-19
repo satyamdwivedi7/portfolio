@@ -23,7 +23,10 @@ export default function Home() {
             <Link target="_blank" href="https://github.com/satyamdwivedi7">
               <FaGithub size={32} />
             </Link>
-            <Link target="_blank" href="https://www.linkedin.com/in/satyam-dwivedi-66434719a/">
+            <Link
+              target="_blank"
+              href="https://www.linkedin.com/in/satyam-dwivedi-66434719a/"
+            >
               <FaLinkedin size={32} />
             </Link>
             <Link target="_blank" href="https://www.instagram.com/satyam_7579/">

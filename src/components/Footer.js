@@ -9,10 +9,10 @@ export default function Footer() {
         <div>
           <div className="flex items-center">
             <Image src="/logo.svg" width={35} height={35} />
-            <h1>Satyam</h1>
+            <h1>Satyam</h1> &nbsp;
+            <p className="text-secondary">satyamdwivedi419@gmail.com</p>
           </div>
-          <span>satyamdwivedi419@gmail.com</span>
-          <p>Web Developer</p>
+          <p>&nbsp;Web Developer</p>
         </div>
         <div className="flex flex-col gap-3">
           <h1>Media</h1>
@@ -36,7 +36,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex justify-center items-center mb-0 pb-0">
-        <p className="text-secondary"> &#169;Copyright 2024. Made by Satyam</p>
+        <p className="text-secondary">Copyright &#169; 2024. Made by Satyam</p>
       </div>
     </footer>
   );
