@@ -9,7 +9,7 @@ export default function Home() {
     console.log("Contact me button clicked");
   }
   return (
-    <section id="home" className="w-[100%] ">
+    <section id="home">
       <div className="flex justify-between">
         <div className="flex justify-between flex-col  w-6/12">
           <h1 className="text-5xl  leading-loose tracking-widest">
@@ -36,7 +36,7 @@ export default function Home() {
           <Button text="Contact me" icon={<MdOutlineArrowForward />} />
         </div>
         <Image
-          src="/profile.webp"
+          src="/avatar.webp"
           alt=""
           className="border-b-2"
           width={450}
