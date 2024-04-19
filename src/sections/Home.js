@@ -9,8 +9,8 @@ export default function Home() {
     console.log("Contact me button clicked");
   }
   return (
-    <section className="w-[100%] ">
-      <div className="flex justify-between my-10">
+    <section id="home" className="w-[100%] ">
+      <div className="flex justify-between">
         <div className="flex justify-between flex-col  w-6/12">
           <h1 className="text-5xl  leading-loose tracking-widest">
             I am a <span>MERN-Stack</span> developer
@@ -20,16 +20,16 @@ export default function Home() {
             B.Tech in Computer Science and Engineering
           </p>
           <div className="flex gap-5">
-            <Link href="">
+            <Link target="_blank" href="https://github.com/satyamdwivedi7">
               <FaGithub size={32} />
             </Link>
-            <Link href="">
+            <Link target="_blank" href="https://www.linkedin.com/in/satyam-dwivedi-66434719a/">
               <FaLinkedin size={32} />
             </Link>
-            <Link href="">
+            <Link target="_blank" href="https://www.instagram.com/satyam_7579/">
               <FaInstagram size={32} />
             </Link>
-            <Link href="">
+            <Link target="_blank" href="https://twitter.com/satyam_7579">
               <FaTwitter size={32} />
             </Link>
           </div>

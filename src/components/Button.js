@@ -1,8 +1,8 @@
-export default function Button({ text, icon = null }) {
+export default function Button({ text, icon = null, url  }) {
   return (
-    <button className="text-base hover:bg-primary font-semibold hover:text-theme border-primary border-2 w-max py-2 px-4 flex items-center">
+    <a href={url} className="text-base hover:bg-primary font-semibold hover:text-theme hover:cursor-pointer border-primary border-2 w-max py-1 px-4 flex items-center">
       {text} &nbsp;
       {icon}
-    </button>
+    </a>
   );
 }
