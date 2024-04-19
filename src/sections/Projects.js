@@ -4,7 +4,7 @@ import Title from "@/components/Title";
 export default function Projects() {
   return (
     <section id="my-works">
-      <Title prefix="#" heading="projects" viewAll={true} />
+      <Title prefix="#" heading="projects" viewAll="/projects" />
       <div className=" w-[100%] grid grid-cols-4">
         <Card
           img="/elcar.webp"

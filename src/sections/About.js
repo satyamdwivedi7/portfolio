@@ -1,7 +1,6 @@
 import Button from "@/components/Button";
 import Title from "@/components/Title";
 import { MdOutlineArrowForward } from "react-icons/md";
-import Image from "next/image";
 export default function About() {
   return (
     <section id="about-me">

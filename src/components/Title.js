@@ -1,5 +1,5 @@
 import { FaLongArrowAltRight } from "react-icons/fa";
-export default function Title({ heading, prefix, viewAll = false }) {
+export default function Title({ heading, prefix, viewAll = null }) {
   return (
     <div className="w-[100%] flex justify-between items-center my-20">
       <div className="w-4/5 flex items-center text-2xl">
