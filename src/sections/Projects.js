@@ -1,12 +1,46 @@
+"use client";
+import { useEffect, useState } from "react";
+
 import Card from "@/components/Card";
 import Title from "@/components/Title";
 
 export default function Projects() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://portfolio-api-tan.vercel.app/projects`,
+          { cache: "no-store" }
+        );
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <section id="my-works">
       <Title prefix="#" heading="projects" viewAll="/projects" />
       <div className=" w-[100%] grid grid-cols-4">
-        <Card
+        {projects.map((project) => (
+          <Card
+            key={project.id}
+            img={project.image}
+            techStack={project.techStack.map((tech) => tech).join(" ")}
+            title={project.title}
+            description={project.description}
+            text="Live"
+            url={project.live}
+            target="_blank"
+            btn={true}
+            URL={project.github}
+          />
+        ))}
+        {/* <Card
           img="/elcar.webp"
           techStack="HTML, CSS, JavaScript"
           title="Elcar"
@@ -45,7 +79,7 @@ export default function Projects() {
           text="GitHub"
           url="https://github.com/satyamdwivedi7/blog"
           target="_blank"
-        />
+        /> */}
       </div>
     </section>
   );

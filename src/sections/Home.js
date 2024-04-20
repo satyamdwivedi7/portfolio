@@ -33,7 +33,7 @@ export default function Home() {
               <FaTwitter size={32} />
             </Link>
           </div>
-          <Button text="Contact me" icon={<MdOutlineArrowForward />} />
+          <Button text="Contact me" icon={<MdOutlineArrowForward />} url='#contacts' />
         </div>
         <Image
           src="/avatar.webp"

@@ -8,8 +8,7 @@ export default function Footer() {
       <div className="flex justify-between py-10 border-t">
         <div>
           <div className="flex items-center">
-            <Image src="/logo.svg" alt='' width={35} height={35} />
-            <h1>Satyam</h1> &nbsp;
+            <Image priority src="/logo.png" width={45} height={45} alt="" />
             <p className="text-secondary">satyamdwivedi419@gmail.com</p>
           </div>
           <p>&nbsp;Web Developer</p>

@@ -1,7 +1,7 @@
 import { Fira_Code } from "next/font/google";
 import "./globals.css";
 import Nav from "@/sections/Nav";
-import Footer from "@/components/Footer";
+import Footer from "@/sections/Footer";
 
 const fira_code = Fira_Code({ subsets: ["latin"] });
 

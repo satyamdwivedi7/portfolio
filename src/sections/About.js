@@ -19,7 +19,7 @@ export default function About() {
             establish their presence online. I always strive to learn about the
             newest technologies and frameworks.
           </p>
-          <Button text="Read More" url="#" icon={<MdOutlineArrowForward />} />
+          <Button text="Resume" url="/" icon={<MdOutlineArrowForward />} />
         </div>
           <img src="/Profile.webp" alt=""className="border-b-2" width={275} height={200} />
       </div>

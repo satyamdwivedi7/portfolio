@@ -27,37 +27,37 @@ export default function Nav() {
   return (
     <nav className=" w-[100%] flex justify-between bg-theme py-10 px-32 z-20 fixed">
       <div className="flex justify-center items-center">
-        <Image priority src="/logo.svg" width={35} height={35} alt=""/>
-        <h1 className="text-2xl font-sans">Satyam</h1>
+        <Image priority src="/logo.png" width={60} height={60} alt=""/>
+        {/* <h1 className="text-2xl font-sans">Satyam</h1> */}
       </div>
       <div className="flex gap-3">
         <Link
-          href="#home"
+          href="/#home"
           className={activeBtn === "home" ? "text-white" : "text-secondary"}
 
         >
           <span>#</span>home
         </Link>
         <Link
-          href="#my-works"
+          href="/#my-works"
           className={activeBtn === "my-works" ? "text-white" : "text-secondary"}
         >
           <span>#</span>my-works
         </Link>
         <Link
-          href="#skills"
+          href="/#skills"
           className={activeBtn === "skills" ? "text-white" : "text-secondary"}
         >
           <span>#</span>skills
         </Link>
         <Link
-          href="#about-me"
+          href="/#about-me"
           className={activeBtn === "about-me" ? "text-white" : "text-secondary"}
         >
           <span>#</span>about-me
         </Link>
         <Link
-          href="#contacts"
+          href="/#contacts"
           className={activeBtn === "contacts" ? "text-white" : "text-secondary"}
         >
           <span>#</span>contacts
