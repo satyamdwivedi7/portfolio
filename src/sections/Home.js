@@ -5,9 +5,6 @@ import { FaTwitter } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
 export default function Home() {
-  function handleClick() {
-    console.log("Contact me button clicked");
-  }
   return (
     <section id="home">
       <div className="flex justify-between">

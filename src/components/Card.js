@@ -1,5 +1,6 @@
 import { FaGithub } from "react-icons/fa";
 import Button from "./Button";
+import Link from "next/link";
 export default function Card({
   img,
   techStack,
@@ -12,7 +13,7 @@ export default function Card({
   URL
 }) {
   return (
-    <div className="flex flex-col w-56 border border-1">
+    <div className="flex flex-col w-56 border border-1 z-10">
       <div className="w-[100%] h-48">
         <img src={img} className="w-[100%] h-[100%]" width={250} height={250} />
       </div>
@@ -26,9 +27,9 @@ export default function Card({
           <div className="flex justify-between">
             <Button url={url} target={target} text={text} />
             {btn && (
-              <a href={URL} target="_blank" className="hover:text-primary">
+              <Link href={URL} target="_blank" className="hover:text-primary">
                 <FaGithub size={32} />
-              </a>
+              </Link>
             )}
           </div>
         </div>
