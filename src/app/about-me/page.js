@@ -1,11 +1,10 @@
-c
+"use client";
 import Box from "@/components/Box";
 import Title from "@/components/Title";
 import { useEffect, useState } from "react";
 
 import Transition from "../transition";
 function Page() {
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between mx-32 pt-32">
       <Title prefix="#" heading="about-me" />
@@ -66,7 +65,6 @@ function Page() {
       <div className="grid grid-cols-3 grid-rows-[(3, 1fr)] gap-5">
         <Box heading="Front eend" description="HTML, CSS, JavaScript, React" />
       </div>
-
     </main>
   );
 }
