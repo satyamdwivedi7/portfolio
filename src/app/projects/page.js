@@ -10,7 +10,7 @@ function Page() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://portfolio-api-tan.vercel.app/projects?filter=all`,
+          `https://portfolio-api.satyamdwivedi.com.np/projects?filter=all`,
           { cache: "no-store" }
         );
         const data = await response.json();

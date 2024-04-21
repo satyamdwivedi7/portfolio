@@ -10,7 +10,7 @@ export default function Skills() {
      const fetchData = async () => {
        try {
          const response = await fetch(
-           `https://portfolio-api-tan.vercel.app/skills`,
+           `https://portfolio-api.satyamdwivedi.com.np/skills`,
            { cache: "no-store" }
          );
          const data = await response.json();

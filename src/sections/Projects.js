@@ -11,7 +11,7 @@ export default function Projects() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://portfolio-api-tan.vercel.app/projects`,
+          `https://portfolio-api.satyamdwivedi.com.np/projects`,
           { cache: "no-store" }
         );
         const data = await response.json();
