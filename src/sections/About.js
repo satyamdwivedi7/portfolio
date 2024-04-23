@@ -21,7 +21,7 @@ export default function About() {
           </p>
           <Button text="Resume" url="/" icon={<MdOutlineArrowForward />} />
         </div>
-          <img src="/Profile.webp" alt=""className="border-b-2" width={275} height={200} />
+          <img src="/profile.webp" alt=""className="border-b-2" width={275} height={200} />
       </div>
     </section>
   );

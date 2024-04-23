@@ -56,7 +56,7 @@ function Page() {
           </p>
         </div>
         <img
-          src="/Profile.webp"
+          src="/profile.webp"
           alt=""
           className="border-b-2 w-[30rem] h-[28rem]"
         />

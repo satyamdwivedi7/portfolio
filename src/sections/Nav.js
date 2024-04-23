@@ -27,7 +27,7 @@ export default function Nav() {
   return (
     <nav className=" w-[100%] flex justify-between bg-theme py-10 px-32 z-20 fixed">
       <div className="flex justify-center items-center">
-        <Image priority src="/logo.png" width={60} height={60} alt=""/>
+        <Image priority src="/logo.png" width={60} height={75} alt=""/>
         {/* <h1 className="text-2xl font-sans">Satyam</h1> */}
       </div>
       <div className="flex gap-3">

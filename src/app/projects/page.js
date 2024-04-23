@@ -28,7 +28,7 @@ function Page() {
       <div className="grid gap-10 grid-cols-4">
         {projects.map((project) => (
           <Card
-            key={project.id}
+            key={project._id}
             img={project.image}
             techStack={project.techStack.map((tech) => tech).join(" ")}
             title={project.title}
