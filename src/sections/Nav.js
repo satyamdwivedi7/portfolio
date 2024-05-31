@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Nav() {
   const [activeBtn, setActiveBtn] = useState("home");
-  
+
   useEffect(() => {
     function handleScroll() {
       const sections = document.querySelectorAll("section");
@@ -23,18 +23,18 @@ export default function Nav() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
+
   return (
-    <nav className=" w-[100%] flex justify-between bg-theme py-10 px-32 z-20 fixed">
+    <nav className=" w-[100%] flex justify-between bg-theme py-10 px-32 z-20 fixed ">
       <div className="flex justify-center items-center">
-        <Image priority src="/logo.png" width={60} height={75} alt=""/>
-        {/* <h1 className="text-2xl font-sans">Satyam</h1> */}
+        <a href="/">
+          <Image priority src="/logo.png" width={65} height={60} alt="" />
+        </a>
       </div>
       <div className="flex gap-3">
         <Link
           href="/#home"
           className={activeBtn === "home" ? "text-white" : "text-secondary"}
-
         >
           <span>#</span>home
         </Link>

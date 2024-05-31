@@ -43,8 +43,8 @@ export default function Home() {
           src="/avatar.webp"
           alt="avatar"
           className="border-b-2"
-          height={450}
-          width={900}
+          height={410}
+          width={400}
         />
       </div>
     </section>
