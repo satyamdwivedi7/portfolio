@@ -1,8 +1,8 @@
 import { FaLongArrowAltRight } from "react-icons/fa";
 export default function Title({ heading, prefix, viewAll = null }) {
   return (
-    <div className="w-[100%] flex justify-between items-center my-20">
-      <div className="w-4/5 flex items-center text-2xl">
+    <div className="w-[100%] flex justify-between items-center my-10">
+      <div className="flex text-xl">
         <span className="text-primary">{prefix}</span>
         <h1>{heading}</h1>
         <hr className="w-4/5 ms-5 border-primary rounded-full" />

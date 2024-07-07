@@ -13,7 +13,7 @@ export default function Card({
   URL
 }) {
   return (
-    <div className="flex flex-col w-56 border border-1 z-10">
+    <div className="flex flex-col w-56 border border-1 z-10 m-4">
       <div className="w-[100%] h-48">
         <img src={img} className="w-[100%] h-[100%]" width={250} height={250} />
       </div>

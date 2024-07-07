@@ -5,12 +5,12 @@
 span {
   color: #586cf6;
 }
-section {
-  /* margin: 5rem 0; */
+/* section {
+
   width: 100%;
   padding-top: 90px;
   margin-top: -90px;
-}
+} */
 
 .slide-in {
   position: fixed;

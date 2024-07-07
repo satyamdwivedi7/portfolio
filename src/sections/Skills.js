@@ -24,7 +24,7 @@ export default function Skills() {
   return (
     <section id="skills">
       <Title prefix="#" heading="skills" />
-      <div className="w-[50%] grid grid-cols-3 gap-4 ">
+      <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
         {skills.map((skill) => (
           <Box
             key={skill._id}

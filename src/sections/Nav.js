@@ -25,13 +25,13 @@ export default function Nav() {
   }, []);
 
   return (
-    <nav className=" w-[100%] flex justify-between bg-theme py-10 px-32 z-20 fixed ">
-      <div className="flex justify-center items-center">
+    <nav className="w-full flex flex-col sm:flex-row justify-center sm:justify-between items-center bg-theme py-4 sm:py-10 px-6 sm:px-32 z-20 fixed">
+      <div className="flex justify-center items-center mb-4 sm:mb-0">
         <a href="/">
-          <Image priority src="/logo.png" width={65} height={60} alt="" />
+          <Image priority src="/logo.png" width={65} height={60} alt="Logo" />
         </a>
       </div>
-      <div className="flex gap-3">
+      <div className="flex gap-3 flex-wrap justify-center">
         <Link
           href="/#home"
           className={activeBtn === "home" ? "text-white" : "text-secondary"}
