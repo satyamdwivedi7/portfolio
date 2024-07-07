@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
           <p>&nbsp;Web Developer</p>
         </div>
-        <div className="flex flex-col gap-3 w-[80%] md:w-[40%] lg:w-[30%]">
+        <div className="flex flex-col gap-3 w-[80%] md:w-[40%] lg:w-[25%]">
           <h1>Media</h1>
           <div className="flex gap-5 justify-between">
             <Link target="_blank" href="https://github.com/satyamdwivedi7">

@@ -7,8 +7,8 @@ import Link from "next/link";
 export default function Home() {
   return (
     <section id="home">
-      <div className="flex flex-col justify-center items-center md:flex-row md:items-start gap-8 pt-[25rem] mt-[-20rem] ">
-        <div className="flex justify-center text-center items-center flex-col md:text-left md:items-start">
+      <div className="flex flex-col justify-center mt-32 lg:mt-24 items-center md:flex-row md:items-start gap-8">
+        <div className="flex justify-center text-justify items-center flex-col md:text-left md:items-start">
           <h1 className="text-3xl  leading-loose tracking-widest">
             I am a <span>MERN-Stack</span> developer
           </h1>
