@@ -22,7 +22,7 @@ export default function Skills() {
      fetchData();
    }, []);
   return (
-    <section id="skills">
+    <section id="skills" className="w-[100%]">
       <Title prefix="#" heading="skills" />
       <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
         {skills.map((skill) => (

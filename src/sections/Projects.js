@@ -25,7 +25,7 @@ export default function Projects() {
   return (
     <section id="my-works">
       <Title prefix="#" heading="projects" viewAll="/projects" />
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center lg:justify-start">
         {projects.map((project) => (
           <Card
             key={project._id}

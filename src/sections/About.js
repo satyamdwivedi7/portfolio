@@ -5,8 +5,8 @@ export default function About() {
   return (
     <section id="about-me">
       <Title prefix="#" heading="about-me" />
-      <div className="flex justify-between">
-        <div className="flex flex-col gap-8 w-[50%] text-secondary text-justify">
+      <div className="flex flex-col-reverse md:flex-row justify-between">
+        <div className="flex flex-col md:w-[50%] gap-8 mt-2 text-secondary text-justify">
           <p>Hello, i'm Satyam</p>
           <p>
             I am a web programmer based in Birgunj, Nepal. I can make responsive
@@ -21,7 +21,7 @@ export default function About() {
           </p>
           <Button text="Resume" url="/Resume.pdf" target={"_blank"} icon={<MdOutlineArrowForward />} />
         </div>
-          <img src="/profile.webp" alt=""className="border-b-2" width={275} height={200} />
+          <img src="/profile.webp" alt=""className="border-b-2 flex justify-center" width={275} height={200} />
       </div>
     </section>
   );

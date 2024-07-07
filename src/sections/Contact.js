@@ -29,12 +29,12 @@ export default function Contact() {
     <section id="contacts">
       <Title prefix="#" heading="contacts" />
       <div className="flex flex-col gap-16">
-        <div className="flex justify-between">
-          <p className="w-[50%]">
+        <div className="flex justify-between flex-col-reverse md:flex-row items-center">
+          <p className="sm:w-[50%] pt-6">
             I'm interested in freelance opportunities. However, if you have
             other request or question, don't hesitate to contact me
           </p>
-          <div className="flex flex-col w-[fit-content] border border-1 p-2">
+          <div className="flex flex-col w-[85%] sm:w-[fit-content] border border-1 p-2">
             <div className="">
               <div className="flex flex-col">
                 <h1 className="p-2">Message me here</h1>
@@ -58,20 +58,20 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <div className="w-[50%] m-auto p-3 flex flex-col justify-center items-center gap-4 border">
+        <div className="w-[100%] lg:w-[50%] m-auto p-3 flex flex-col justify-center items-center gap-4 border">
           <h1>Contact Me</h1>
           <input
-            className="w-[50%] bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="sm:w-[50%] bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             type="text"
             placeholder="Enter your name"
           />
           <input
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block sm:w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             type="email"
             placeholder="Enter your email"
           />
           <button
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 hover:bg-theme"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block sm:w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 hover:bg-theme"
             type="submit"
             onClick={sendMail}
           >

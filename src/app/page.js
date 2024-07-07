@@ -9,12 +9,12 @@ import Contact from "@/sections/Contact";
 export default function Page() {
  
   return (
-    <main className="flex min-h-screen flex-col justify-between items-center mx-16 pt-16 sm:mx-32 sm:pt-32">
+    <main className="flex min-h-screen flex-col justify-between md:items-start mx-6 pt-6 md:mx-20 md:pt-20 xl:mx-36 xl:pt-36">
       <Home />
       <Projects />
       <Skills />
-      {/* <About />
-      <Contact /> */}
+      <About />
+      <Contact />
     </main>
   );
 }
