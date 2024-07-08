@@ -23,9 +23,9 @@ function Page() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between mx-32 pt-32">
+    <main className="flex min-h-screen flex-col  items-center justify-between mx-6 pt-32 sm:pt-6 md:mx-20 md:pt-20 xl:mx-36 xl:pt-36">
       <Title prefix="/" heading="projects" />
-      <div className="grid gap-10 grid-cols-4">
+      <div className="flex flex-wrap justify-center sm:justify-between">
         {projects.map((project) => (
           <Card
             key={project._id}
