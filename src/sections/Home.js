@@ -9,7 +9,7 @@ export default function Home() {
     <section id="home">
       <div className="flex flex-col items-center justify-between mt-32 md:mt-8 md:flex-row md:items-start gap-8">
         <div className="flex justify-center text-justify items-center flex-col md:w-[50%] md:text-left md:items-start">
-          <h1 className="text-3xl md:text-5xl  leading-loose tracking-widest">
+          <h1 className="text-3xl md:text-5xl leading-loose tracking-widest">
             I am a <span>MERN-Stack</span> developer
           </h1>
           <p className="text-secondary m-2 ml-0">

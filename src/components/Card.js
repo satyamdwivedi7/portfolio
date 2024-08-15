@@ -10,10 +10,10 @@ export default function Card({
   url,
   target,
   btn = false,
-  URL
+  URL,
 }) {
   return (
-    <div className="flex flex-col w-56 border border-1 z-10 m-4 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:shadow-2xl shadow-black">
+    <div className="flex flex-col w-[15rem] h-[23rem] border border-1 z-10 m-4 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-150 hover:shadow-2xl shadow-black">
       <div className="w-[100%] h-48">
         <img src={img} className="w-[100%] h-[100%]" width={250} height={250} />
       </div>

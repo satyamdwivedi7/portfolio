@@ -7,7 +7,7 @@ async function Page() {
   );
   const projects = await response.json();
   return (
-    <main className="flex min-h-screen flex-col  items-center mx-6 pt-32 sm:pt-6 md:mx-20 md:pt-20 xl:mx-36 xl:pt-36">
+    <main className="flex min-h-screen flex-col  items-center mx-6 pt-6 sm:pt-6 md:mx-20 md:pt-12 xl:mx-36 xl:pt-20">
       <Title prefix="/" heading="projects" />
       <div className="flex flex-wrap justify-center sm:justify-normal gap-16">
         {projects.map((project) => (

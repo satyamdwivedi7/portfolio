@@ -8,7 +8,7 @@ export default async function Page() {
         `https://portfolio-api.satyamdwivedi.com.np/projects?filter=all`,
         { cache: "no-store" }
       );
-      const topProjects = await fetch('https://portfolio-api.satyamdwivedi.com.np/projects', { cache: "no-store" });
+      const topProjects = await fetch('https://portfolio-api.satyamdwivedi.com.np/projects?filter=4', { cache: "no-store" });
       const allProjectsData = await allProjects.json();
       const topProjectsData = await topProjects.json();
  
