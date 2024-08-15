@@ -1,31 +1,15 @@
-"use client";
-import { useEffect, useState } from "react";
 import Card from "@/components/Card";
 import Title from "@/components/Title";
-import Transition from "@/app/transition";
-function Page() {
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://portfolio-api.satyamdwivedi.com.np/projects?filter=all`,
-          { cache: "no-store" }
-        );
-        const data = await response.json();
-        setProjects(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
+async function Page() {
+  const response = await fetch(
+    `https://portfolio-api.satyamdwivedi.com.np/projects?filter=all`,
+    { cache: "no-store" }
+  );
+  const projects = await response.json();
   return (
-    <main className="flex min-h-screen flex-col  items-center justify-between mx-6 pt-32 sm:pt-6 md:mx-20 md:pt-20 xl:mx-36 xl:pt-36">
+    <main className="flex min-h-screen flex-col  items-center mx-6 pt-32 sm:pt-6 md:mx-20 md:pt-20 xl:mx-36 xl:pt-36">
       <Title prefix="/" heading="projects" />
-      <div className="flex flex-wrap justify-center sm:justify-between">
+      <div className="flex flex-wrap justify-center sm:justify-normal gap-16">
         {projects.map((project) => (
           <Card
             key={project._id}
@@ -45,4 +29,4 @@ function Page() {
   );
 }
 
-export default Transition(Page);
+export default Page;

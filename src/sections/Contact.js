@@ -1,3 +1,4 @@
+"use client";
 import Title from "@/components/Title";
 import { FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";

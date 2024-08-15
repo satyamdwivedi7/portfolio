@@ -17,27 +17,3 @@ section {
     margin-top: -100px;
   }
 }
-
-.slide-in {
-  position: fixed;
-  top: 0;
-  right: -100%; /* Start off-screen on the right */
-  width: 100%;
-  height: 100vh;
-  background: #0f0f0f;
-  transform-origin: right; /* Change transform-origin to right */
-  z-index: 50;
-  transition: transform 0.3s ease-out; /* Add a transition for smooth animation */
-}
-
-.slide-out {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #0f0f0f;
-  transform-origin: top;
-  z-index: 50;
-  transition: transform 0.3s ease-out; /* Add a transition for smooth animation */
-}
