@@ -25,6 +25,9 @@ export default function Contact() {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.error(error));
+
+    document.querySelector("input[type=email]").value = "";
+    document.querySelector("input[type=text]").value = "";
   }
   return (
     <section id="contacts">
