@@ -9,7 +9,7 @@ async function Page() {
   return (
     <main className="flex min-h-screen flex-col  items-center mx-6 pt-6 sm:pt-6 md:mx-20 md:pt-12 xl:mx-36 xl:pt-20">
       <Title prefix="/" heading="projects" />
-      <div className="flex flex-wrap justify-center sm:justify-normal gap-16">
+      <div className="flex flex-wrap justify-center sm:justify-normal gap-10">
         {projects.map((project) => (
           <Card
             key={project._id}
