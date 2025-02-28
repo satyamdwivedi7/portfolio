@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="w-[85%] ">
           <div className="flex items-center">
             <Image priority src="/logo.png" width={45} height={55} alt="" />
-            <p className="text-secondary">satyamdwivedi419@gmail.com</p>
+            <p className="text-secondary">contact@satyamdwivedi.com.np</p>
           </div>
           <p>&nbsp;Web Developer</p>
         </div>
@@ -35,7 +35,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex justify-center items-center mb-0 pb-0">
-        <p className="text-secondary">Copyright &#169; 2024. Made by Satyam</p>
+        <p className="text-secondary">Copyright &#169; {new Date().getFullYear()}. Made by Satyam</p>
       </div>
     </footer>
   );

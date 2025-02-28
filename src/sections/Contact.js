@@ -9,9 +9,11 @@ export default function Contact() {
     myHeaders.append("Content-Type", "application/json");
     const email = document.querySelector("input[type=email]").value;
     const name = document.querySelector("input[type=text]").value;
+    const messageFromVisitor = document.querySelector("textarea").value;
     const raw = JSON.stringify({
       name: name,
       to: email,
+      messageFromVisitor: messageFromVisitor,
     });
 
     const requestOptions = {
@@ -21,13 +23,13 @@ export default function Contact() {
       redirect: "follow",
     };
 
-    fetch("https://portfolio-api-tan.vercel.app/sendmail", requestOptions)
+    fetch("https://portfolio-api.satyamdwivedi.com.np/sendmail", requestOptions)
       .then((response) => response.text())
-      .then((result) => console.log(result))
       .catch((error) => console.error(error));
 
     document.querySelector("input[type=email]").value = "";
     document.querySelector("input[type=text]").value = "";
+    document.querySelector("textarea").value = "";
   }
   return (
     <section id="contacts">
@@ -68,12 +70,22 @@ export default function Contact() {
             className="sm:w-[50%] bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             type="text"
             placeholder="Enter your name"
+            required
           />
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block sm:w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             type="email"
             placeholder="Enter your email"
+            required
           />
+          <textarea 
+          name="message" 
+          id="message"
+          required
+          rows={3}
+          className="w-[14.5rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block sm:w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Enter your message">
+          </textarea>
           <button
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block sm:w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 hover:bg-theme"
             type="submit"
