@@ -2,6 +2,9 @@
 import Title from "@/components/Title";
 import { FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Contact() {
   function sendMail() {
     const myHeaders = new Headers();
@@ -25,12 +28,19 @@ export default function Contact() {
 
     fetch("https://portfolio-api.satyamdwivedi.com.np/sendmail", requestOptions)
       .then((response) => response.text())
-      .catch((error) => console.error(error));
+      .then(() => {
+        toast.success("Message sent successfully!");
+      })
+      .catch((error) => {
+        toast.error("Message not sent.");
+        console.error(error);
+      });
 
     document.querySelector("input[type=email]").value = "";
     document.querySelector("input[type=text]").value = "";
     document.querySelector("textarea").value = "";
   }
+
   return (
     <section id="contacts">
       <Title prefix="#" heading="contacts" />
@@ -78,14 +88,14 @@ export default function Contact() {
             placeholder="Enter your email"
             required
           />
-          <textarea 
-          name="message" 
-          id="message"
-          required
-          rows={3}
-          className="w-[14.5rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block sm:w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Enter your message">
-          </textarea>
+          <textarea
+            name="message"
+            id="message"
+            required
+            rows={3}
+            className="w-[14.5rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block sm:w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Enter your message"
+          ></textarea>
           <button
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block sm:w-[50%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 hover:bg-theme"
             type="submit"
@@ -95,6 +105,7 @@ export default function Contact() {
           </button>
         </div>
       </div>
+      <ToastContainer theme="dark" />
     </section>
   );
 }
