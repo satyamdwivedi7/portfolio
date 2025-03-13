@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://satyamdwivedi.com.np
+
+# Sitemaps
+Sitemap: https://satyamdwivedi.com.np/sitemap.xml
