@@ -9,7 +9,7 @@ export default function About() {
         <div className="flex flex-col md:w-[50%] gap-8 mt-2 text-secondary text-justify">
           <p>Hello, i'm Satyam</p>
           <p>
-            I am a web programmer based in Birgunj, Nepal. I can make responsive
+            I am a web programmer based in Vellore, India. I can make responsive
             web applications from scratch and raise them into modern
             user-friendly web experiences.
           </p>

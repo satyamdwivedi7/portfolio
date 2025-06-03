@@ -13,7 +13,7 @@ export default function Home() {
             I am a <span>MERN-Stack</span> developer
           </h1>
           <p className="text-secondary m-2 ml-0">
-            A third year student at Vellore Institute of Technology pursuing
+            A final year student at Vellore Institute of Technology pursuing
             B.Tech in Computer Science and Engineering
           </p>
           <div className="flex gap-11 m-4 ml-0">
