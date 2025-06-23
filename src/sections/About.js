@@ -33,7 +33,7 @@ export default function About() {
           <p>Let's connect and build what's next.</p>
           <Button
             text="Resume"
-            url="/Satyam_Dwivedi_Resume.pdf"
+            url="/Resume_Satyam_Dwivedi.pdf"
             target={"_blank"}
             icon={<MdOutlineArrowForward />}
           />
