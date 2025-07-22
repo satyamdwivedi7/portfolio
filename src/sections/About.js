@@ -9,7 +9,7 @@ export default function About() {
         <div className="flex flex-col md:w-[50%] gap-8 mt-2 text-secondary text-justify">
           <p>Hello, i'm Satyam</p>
           <p>
-            A third-year Computer Science and Engineering student at VIT
+            A final-year Computer Science and Engineering student at VIT
             Vellore, and an AWS Certified Solutions Architect &mdash; Associate.
             I specialize in full-stack web development, mobile application
             development, and scalable backend systems. My core tech stack
