@@ -1,17 +1,17 @@
-import Projects from "@/sections/Projects";
-import Home from "@/sections/Home";
-import Skills from "@/sections/Skills";
-import About from "@/sections/About";
-import Contact from "@/sections/Contact";
+import Hero from "@/components/Hero";
+import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
+import About from "@/components/About";
+import Contact from "@/components/Contact";
 
 export const metadata = {
-  title: "Satyam Dwivedi - Portfolio",
+  title: "Satyam Dwivedi - Full Stack Developer Portfolio",
   description:
-    "Explore Satyam Dwivedi's portfolio showcasing MERN stack web development projects, expertise in React.js, Next.js, and backend technologies.",
+    "Innovative Full Stack Developer specializing in MERN stack, Next.js, and cutting-edge web technologies. Explore my projects and let's build something amazing together.",
   openGraph: {
-    title: "Satyam Dwivedi - Portfolio",
+    title: "Satyam Dwivedi - Full Stack Developer Portfolio",
     description:
-      "Satyam Dwivedi specializes in building scalable web applications using MERN stack technologies.",
+      "Innovative Full Stack Developer crafting exceptional digital experiences with modern web technologies.",
     url: "https://satyamdwivedi.com.np",
     images: [
       {
@@ -21,40 +21,35 @@ export const metadata = {
         alt: "Satyam Dwivedi - Portfolio",
       },
     ],
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     site: "https://twitter.com/satyam7579",
     creator: "@satyam7579",
   },
+  keywords: [
+    "Full Stack Developer",
+    "React.js",
+    "Next.js",
+    "Node.js",
+    "MERN Stack",
+    "Web Development",
+    "Portfolio",
+    "Satyam Dwivedi"
+  ],
+  authors: [{ name: "Satyam Dwivedi" }],
+  creator: "Satyam Dwivedi",
 };
 
-async function fetchProjects(filter) {
-  try {
-    const res = await fetch(
-      `https://portfolio-api.satyamdwivedi.com.np/projects?filter=${filter}`,
-      { cache: "no-store" }
-    );
-    return res.json();
-  } catch (error) {
-    console.error("Error fetching projects:", error);
-    return [];
-  }
-}
-
-export default async function Page() {
-  const [allProjectsData, topProjectsData] = await Promise.all([
-    fetchProjects("all"),
-    fetchProjects("4"),
-  ]);
-
+export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col justify-between md:items-start mx-6 pt-6 md:mx-20 md:pt-20 xl:mx-36 xl:pt-36">
-      <Home />
-      <Projects api={topProjectsData} />
-      <Skills />
+    <div className="min-h-screen">
+      <Hero />
       <About />
+      <Skills />
+      <Projects />
       <Contact />
-    </main>
+    </div>
   );
 }
