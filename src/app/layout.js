@@ -38,8 +38,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "https://twitter.com/satyam7579",
-    creator: "@satyam7579",
+    site: "https://twitter.com/satyam_7579",
+    creator: "@satyam_7579",
   },
   keywords: [
     "Full Stack Developer",
@@ -84,7 +84,7 @@ export default function RootLayout({ children }) {
               image: "https://satyamdwivedi.com.np/profile.webp",
               sameAs: [
                 "https://www.linkedin.com/in/satyam7579",
-                "https://twitter.com/satyam7579",
+                "https://twitter.com/satyam_7579",
                 "https://github.com/satyamdwivedi7",
                 "https://instagram.com/satyam_7579",
                 "https://facebook.com/satyam7579",

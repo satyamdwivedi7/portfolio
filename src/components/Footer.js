@@ -6,7 +6,7 @@ import { Heart, Code, Coffee, ArrowUp, Github, Linkedin, Twitter, Instagram, Mai
 const socialLinks = [
   { icon: Github, href: 'https://github.com/satyamdwivedi7', label: 'GitHub' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/satyam7579', label: 'LinkedIn' },
-  { icon: Twitter, href: 'https://twitter.com/satyam7579', label: 'Twitter' },
+  { icon: Twitter, href: 'https://twitter.com/satyam_7579', label: 'Twitter' },
   { icon: Instagram, href: 'https://instagram.com/satyam_7579', label: 'Instagram' },
   { icon: Mail, href: 'mailto:contact@satyamdwivedi.com.np', label: 'Email' },
 ];
@@ -137,7 +137,7 @@ export default function Footer() {
               
               <div className="pt-4 space-y-2 text-sm text-gray-400">
                 <p>📧 contact@satyamdwivedi.com.np</p>
-                <p>📍 Kathmandu, Nepal</p>
+                <p>📍 Vellore, Tamil Nadu</p>
                 <p>🌐 Available for freelance work</p>
               </div>
             </div>

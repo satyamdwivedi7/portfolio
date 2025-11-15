@@ -1,117 +1,97 @@
 'use client';
 
-import { useState, useEffect, useMemo, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, Play, X, Loader2, Eye } from 'lucide-react';
 import Image from 'next/image';
 import { fetchProjects } from '@/lib/api';
-import { DataContext } from '@/components/DataProvider';
 
-export default function Projects({ initialProjects = [] }) {
+export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [projects, setProjects] = useState(initialProjects);
-  const [showAllProjects, setShowAllProjects] = useState(false);
-  const [loading, setLoading] = useState(!initialProjects.length);
+  const [projects, setProjects] = useState([]);
+  const [showAllProjects, setShowAllProjects] = useState(false); // Show featured (3) by default
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Get pre-loaded data from context
-  const contextData = useContext(DataContext);
-  const preloadedProjects = contextData?.projects || [];
-  const contextLoading = contextData?.isLoading || false;
+  console.log('Projects component rendered. State:', {
+    projectsCount: projects.length,
+    selectedProject: selectedProject ? selectedProject.title : 'none',
+    showAll: showAllProjects,
+    loading,
+    error
+  });
 
-  // Stable project loading - only run once on mount
+  // Load projects only once on mount
   useEffect(() => {
+    let isMounted = true;
+    
     const loadProjects = async () => {
-      // Only load if we don't already have projects
-      if (projects.length > 0) return;
-      
       try {
-        // Use provided initial data, pre-loaded data, or fetch fresh
-        let projectData = initialProjects;
-        
-        if (!projectData.length && preloadedProjects?.length) {
-          projectData = preloadedProjects;
-        }
-
-        if (projectData.length > 0) {
-          setProjects(projectData);
-          setLoading(false);
-          return; // Use cached data, no need to fetch
-        }
-        
-        // Fetch fresh data if no cached data available
         setLoading(true);
-        const fetchedProjects = await fetchProjects();
-        setProjects(fetchedProjects);
-        setError(null);
-        setLoading(false);
+        const projectData = await fetchProjects();
+        
+        console.log('Projects loaded:', projectData.length);
+        
+        if (isMounted) {
+          setProjects(projectData);
+          setError(null);
+          console.log('Projects state set:', projectData.length);
+        }
       } catch (err) {
         console.error('Error fetching projects:', err);
-        setError(err.message);
-        setLoading(false);
+        if (isMounted) {
+          setError(err.message);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     loadProjects();
-  }, []); // Empty dependency array to run only once
+    
+    return () => {
+      console.log('Component unmounting');
+      isMounted = false;
+    };
+  }, []);
 
-  // Handle initial projects from props or context
+  // Simpler, more robust scroll lock for modal
   useEffect(() => {
-    if (initialProjects.length > 0 && projects.length === 0) {
-      setProjects(initialProjects);
-      setLoading(false);
-    } else if (preloadedProjects.length > 0 && projects.length === 0) {
-      setProjects(preloadedProjects);
-      setLoading(false);
-    }
-  }, [initialProjects, preloadedProjects]);
-
-  // Enhanced scroll lock effect with cleanup
-  useEffect(() => {
+    console.log('Modal state changed, selectedProject:', selectedProject ? 'OPEN' : 'CLOSED');
+    console.log('Current projects count:', projects.length);
+    
     if (selectedProject) {
-      // Calculate scrollbar width before hiding it
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      // Store the current scroll position
+      const scrollY = window.pageYOffset;
       
-      // Save original styles
-      const originalOverflow = document.body.style.overflow;
-      const originalPaddingRight = document.body.style.paddingRight;
-      
-      // Lock all scrolling completely
+      // Lock scroll
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
       
-      // Prevent scrolling on touch devices
-      const preventTouch = (e) => e.preventDefault();
-      document.addEventListener('touchmove', preventTouch, { passive: false });
-      
-      // Ensure modal is above all other elements
-      document.documentElement.style.setProperty('--modal-z-index', '9999');
-      
+      // Return cleanup function
       return () => {
-        // Cleanup function
-        document.body.style.overflow = originalOverflow;
-        document.body.style.paddingRight = originalPaddingRight;
-        document.removeEventListener('touchmove', preventTouch);
-        document.documentElement.style.removeProperty('--modal-z-index');
+        console.log('Cleaning up modal scroll lock');
+        
+        // Restore scroll
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        
+        // Restore scroll position
+        window.scrollTo(0, scrollY);
+        
+        console.log('Modal cleanup complete');
       };
-    } else {
-      // Restore all scrolling when no project is selected
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-      document.documentElement.style.removeProperty('--modal-z-index');
     }
   }, [selectedProject]);
 
-  // Memoized project calculations for performance
-  const { featuredProjects, displayedProjects } = useMemo(() => {
-    const featured = projects.slice(0, 6); // Show first 6 as featured
-    const displayed = showAllProjects ? projects : featured;
-    
-    return {
-      featuredProjects: featured,
-      displayedProjects: displayed
-    };
-  }, [projects, showAllProjects]);
+  // Display 3 featured projects when showAllProjects is false, otherwise show all
+  const displayedProjects = showAllProjects ? projects : projects.slice(0, 3);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -266,50 +246,70 @@ export default function Projects({ initialProjects = [] }) {
           </motion.p>
         </motion.div>
 
-        {/* View All Projects Button */}
-        {projects.length > 6 && (
+        {/* Project Filter Buttons - Only show if more than 3 projects */}
+        {projects.length > 3 && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="flex flex-wrap justify-center gap-4 mb-12"
           >
+            {/* Featured Projects Button */}
             <motion.button
-              onClick={() => setShowAllProjects(!showAllProjects)}
-              whileHover={{ scale: 1.05 }}
+              onClick={() => setShowAllProjects(false)}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-neon-cyan to-neon-purple text-dark-950 font-bold rounded-xl hover:shadow-lg hover:shadow-neon-cyan/25 transition-all duration-300"
+              className={`flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 hoverable ${
+                !showAllProjects
+                  ? 'bg-gradient-to-r from-neon-cyan/20 to-neon-cyan/40 border border-white/20 text-white shadow-lg'
+                  : 'bg-dark-800/50 border border-white/10 text-gray-400 hover:text-white hover:border-white/20'
+              }`}
             >
-              <Eye size={24} />
-              <span className="text-lg">
-                {showAllProjects 
-                  ? `Showing All ${projects.length} Projects` 
-                  : `View All ${projects.length} Projects`}
-              </span>
+              <Eye size={20} />
+              <span>Featured Projects</span>
+            </motion.button>
+
+            {/* All Projects Button */}
+            <motion.button
+              onClick={() => setShowAllProjects(true)}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className={`flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 hoverable ${
+                showAllProjects
+                  ? 'bg-gradient-to-r from-neon-purple/20 to-neon-purple/40 border border-white/20 text-white shadow-lg'
+                  : 'bg-dark-800/50 border border-white/10 text-gray-400 hover:text-white hover:border-white/20'
+              }`}
+            >
+              <Eye size={20} />
+              <span>All Projects</span>
             </motion.button>
           </motion.div>
         )}
 
-        {/* Projects Display */}
-        {displayedProjects.length > 0 && (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="mb-16"
-          >
-            <h3 className="text-2xl font-bold text-white mb-8 flex items-center">
-              <span className="w-1 h-6 bg-neon-cyan mr-3 rounded"></span>
-              {showAllProjects ? 'All Projects' : 'Featured Projects'}
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {displayedProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
-          </motion.div>
+        {/* Projects Display - Always render container */}
+        {!loading && !error && (
+          <div className="mb-16">
+            {displayedProjects.length > 0 ? (
+              <>
+                <motion.div
+                  key={showAllProjects ? 'all' : 'featured'}
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                  {displayedProjects.map((project) => (
+                    <ProjectCard key={project.id} project={project} />
+                  ))}
+                </motion.div>
+              </>
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-gray-400">No projects to display</p>
+              </div>
+            )}
+          </div>
         )}
 
         {/* Loading State */}
@@ -358,46 +358,50 @@ export default function Projects({ initialProjects = [] }) {
         )}
       </div>
 
-      {/* Project Modal */}
-      <AnimatePresence>
+      {/* Project Modal with Fixed Z-Index */}
+      <AnimatePresence mode="wait">
         {selectedProject && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="modal-overlay fixed inset-0 bg-dark-950/95 backdrop-blur-md flex items-center justify-center p-4 pt-20"
+            transition={{ duration: 0.2 }}
+            style={{ zIndex: 99999 }}
+            className="fixed inset-0 bg-dark-950/98 backdrop-blur-lg flex items-center justify-center p-4"
             onClick={() => setSelectedProject(null)}
-            onWheel={(e) => e.preventDefault()}
-            onTouchMove={(e) => e.preventDefault()}
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0, y: 50 }}
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 50 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ duration: 0.3, type: "spring" }}
               onClick={(e) => e.stopPropagation()}
-              onWheel={(e) => e.preventDefault()}
-              onTouchMove={(e) => e.preventDefault()}
-              className="modal-content max-w-4xl w-full max-h-[75vh] bg-dark-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col border border-white/10"
+              style={{ zIndex: 100000 }}
+              className="relative max-w-4xl w-full max-h-[85vh] bg-dark-900 rounded-2xl overflow-hidden shadow-2xl border-2 border-neon-cyan/20"
             >
+              {/* Close Button - Absolutely positioned at top */}
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 z-50 p-3 rounded-full bg-dark-950/90 text-white hover:bg-neon-cyan hover:text-dark-950 transition-all duration-300 shadow-lg border border-white/10"
+                aria-label="Close modal"
+              >
+                <X size={24} />
+              </button>
+
               {/* Modal Header with Image */}
-              <div className="relative h-48 lg:h-56 flex-shrink-0">
+              <div className="relative h-56 lg:h-64 flex-shrink-0">
                 <Image
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   fill
                   className="object-cover"
+                  priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-800 via-dark-800/50 to-transparent" />
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-dark-950/80 text-white hover:bg-dark-950 transition-colors duration-300 z-10 shadow-lg"
-                >
-                  <X size={24} />
-                </button>
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/70 to-transparent" />
               </div>
               
-              {/* Non-scrollable Modal Content */}
-              <div className="p-6 lg:p-8 flex-1 overflow-hidden">
+              {/* Modal Content - Scrollable */}
+              <div className="p-6 lg:p-8 overflow-y-auto max-h-[calc(85vh-16rem)]">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2">{selectedProject.title}</h3>
@@ -410,24 +414,22 @@ export default function Projects({ initialProjects = [] }) {
                   </div>
                 </div>
                 
-                <p className="text-gray-300 mb-4 leading-relaxed line-clamp-3">
+                <p className="text-gray-300 mb-6 leading-relaxed">
                   {selectedProject.description}
                 </p>
                 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {selectedProject.technologies.slice(0, 6).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-1 text-xs rounded-lg bg-dark-700/50 text-gray-300 border border-white/10"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {selectedProject.technologies.length > 6 && (
-                    <span className="px-2 py-1 text-xs rounded-lg bg-dark-700/50 text-gray-400 border border-white/10">
-                      +{selectedProject.technologies.length - 6} more
-                    </span>
-                  )}
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-gray-400 mb-3">Technologies Used:</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 text-sm rounded-lg bg-dark-700 text-gray-200 border border-white/10"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 
                 <div className="flex space-x-4">

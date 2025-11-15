@@ -21,7 +21,7 @@ export async function fetchProjects() {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
     
-    const response = await fetch(`${API_BASE_URL}/projects`, {
+    const response = await fetch(`${API_BASE_URL}/projects?filter=all`, {
       signal: controller.signal,
       headers: {
         'Cache-Control': 'no-cache',

@@ -15,15 +15,15 @@ const contactMethods = [
   {
     icon: Phone,
     label: 'Phone',
-    value: '+977 9876543210',
-    href: 'tel:+9779876543210',
+    value: '+91-8438913057',
+    href: 'tel:+918438913057',
     color: 'neon-purple'
   },
   {
     icon: MapPin,
     label: 'Location',
-    value: 'Kathmandu, Nepal',
-    href: 'https://maps.google.com/?q=Kathmandu,Nepal',
+    value: 'Vellore, Tamil Nadu',
+    href: 'https://maps.google.com/?q=Vellore,Tamil+Nadu,India',
     color: 'neon-pink'
   }
 ];
@@ -31,7 +31,7 @@ const contactMethods = [
 const socialLinks = [
   { icon: Github, href: 'https://github.com/satyamdwivedi7', label: 'GitHub', color: 'neon-cyan' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/satyam7579', label: 'LinkedIn', color: 'neon-purple' },
-  { icon: Twitter, href: 'https://twitter.com/satyam7579', label: 'Twitter', color: 'neon-pink' },
+  { icon: Twitter, href: 'https://twitter.com/satyam_7579', label: 'Twitter', color: 'neon-pink' },
   { icon: Instagram, href: 'https://instagram.com/satyam_7579', label: 'Instagram', color: 'neon-green' },
 ];
 

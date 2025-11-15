@@ -77,7 +77,7 @@ export default function Hero() {
   const socialLinks = [
     { icon: Github, href: 'https://github.com/satyamdwivedi7', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/satyam7579', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com/satyam7579', label: 'Twitter' },
+    { icon: Twitter, href: 'https://twitter.com/satyam_7579', label: 'Twitter' },
     { icon: Mail, href: 'mailto:contact@satyamdwivedi.com.np', label: 'Email' },
   ];
 

@@ -25,8 +25,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "https://twitter.com/satyam7579",
-    creator: "@satyam7579",
+    site: "https://twitter.com/satyam_7579",
+    creator: "@satyam_7579",
   },
   keywords: [
     "Full Stack Developer",
