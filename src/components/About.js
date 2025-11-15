@@ -6,9 +6,8 @@ import Image from 'next/image';
 
 const stats = [
   { label: 'Years of Experience', value: '3+', icon: Calendar, color: 'neon-cyan' },
-  { label: 'Projects Completed', value: '50+', icon: Code2, color: 'neon-purple' },
+  { label: 'Projects Completed', value: '20+', icon: Code2, color: 'neon-purple' },
   { label: 'Cups of Coffee', value: '1000+', icon: Coffee, color: 'neon-pink' },
-  { label: 'Happy Clients', value: '25+', icon: Heart, color: 'neon-green' },
 ];
 
 const highlights = [
