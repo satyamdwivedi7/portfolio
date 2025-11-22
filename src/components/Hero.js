@@ -5,11 +5,10 @@ import { motion } from 'framer-motion';
 import { ChevronDown, Download, Github, Linkedin, Twitter, Mail, Code, Zap, Sparkles } from 'lucide-react';
 
 const roles = [
-  'Full Stack Developer',
-  'React.js Expert',
-  'Next.js Developer',
-  'MERN Stack Engineer',
-  'Web Innovator'
+  'Software Development Engineer',
+  'Backend Developer',
+  'Problem Solver',
+  'Code Architect'
 ];
 
 export default function Hero() {
@@ -173,12 +172,12 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              I craft exceptional digital experiences with cutting-edge technologies. 
-              Specializing in full-stack development with a passion for creating 
-              <span className="text-neon-purple font-semibold"> innovative </span> 
+              I design and build 
+              <span className="text-neon-cyan font-semibold"> scalable systems </span> 
               and 
-              <span className="text-neon-cyan font-semibold"> scalable </span> 
-              web solutions.
+              <span className="text-neon-purple font-semibold"> robust architectures</span>. 
+              Passionate about solving complex problems with efficient algorithms and 
+              writing clean, maintainable code.
             </motion.p>
           </motion.div>
 

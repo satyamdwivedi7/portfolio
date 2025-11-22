@@ -15,7 +15,7 @@ export const metadata = {
     url: "https://satyamdwivedi.com.np",
     images: [
       {
-        url: "https://satyamdwivedi.com.np/profile.webp",
+        url: "https://satyamdwivedi.com.np/satyam-dwivedi.webp",
         width: 1200,
         height: 630,
         alt: "Satyam Dwivedi - Portfolio",

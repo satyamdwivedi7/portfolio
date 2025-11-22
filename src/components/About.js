@@ -12,20 +12,20 @@ const stats = [
 
 const highlights = [
   {
-    title: 'Problem Solver',
-    description: 'I love breaking down complex problems into elegant, efficient solutions.',
+    title: 'Algorithmic Thinker',
+    description: 'Expert in data structures, algorithms, and optimizing code for performance.',
     icon: Zap,
     color: 'neon-cyan'
   },
   {
-    title: 'Detail Oriented',
-    description: 'Obsessed with pixel-perfect designs and clean, maintainable code.',
+    title: 'System Designer',
+    description: 'Designing scalable architectures and distributed systems for high availability.',
     icon: Star,
     color: 'neon-purple'
   },
   {
-    title: 'Team Player',
-    description: 'Collaborative approach with excellent communication skills.',
+    title: 'Code Quality Advocate',
+    description: 'Writing clean, maintainable code with comprehensive testing and documentation.',
     icon: Heart,
     color: 'neon-pink'
   },
@@ -121,11 +121,13 @@ export default function About() {
               >
                 <div className="relative w-full aspect-square rounded-2xl overflow-hidden glass">
                   <Image
-                    src="/profile.webp"
-                    alt="Satyam Dwivedi"
+                    src="/satyam-dwivedi.webp"
+                    alt="Satyam Dwivedi - Software Development Engineer from VIT Vellore"
+                    title="Satyam Dwivedi - Software Development Engineer"
                     fill
                     className="object-cover"
                     priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-dark-950/20 via-transparent to-transparent" />
@@ -175,20 +177,21 @@ export default function About() {
               <div className="space-y-4 text-gray-300 leading-relaxed">
                 <p className="text-lg">
                   Hello! I'm <span className="text-neon-cyan font-semibold">Satyam Dwivedi</span>, 
-                  a passionate full-stack developer with a love for creating 
-                  <span className="text-neon-purple font-semibold"> innovative digital experiences</span>.
+                  a Software Development Engineer specializing in building 
+                  <span className="text-neon-purple font-semibold"> scalable backend systems </span>
+                  and solving complex algorithmic problems.
                 </p>
                 
                 <p>
-                  My journey in web development began with curiosity about how websites work, 
-                  and it has evolved into a career focused on building scalable, user-friendly applications 
-                  that make a real difference.
+                  My journey in software engineering began with a deep interest in data structures and algorithms, 
+                  evolving into expertise in designing distributed systems, optimizing performance, 
+                  and implementing efficient solutions that handle millions of requests.
                 </p>
                 
                 <p>
-                  I specialize in the <span className="text-neon-pink font-semibold">MERN stack</span> and 
-                  modern web technologies, always staying updated with the latest trends and best practices 
-                  in software development.
+                  I specialize in <span className="text-neon-pink font-semibold">backend development</span>, 
+                  system design, and database optimization, with strong foundations in 
+                  <span className="text-neon-cyan font-semibold"> computer science fundamentals</span>.
                 </p>
               </div>
             </motion.div>
@@ -228,7 +231,7 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
+          className="mt-20 grid grid-cols-2 md:grid-cols-3 gap-8"
         >
           {stats.map((stat, index) => {
             const Icon = stat.icon;

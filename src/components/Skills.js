@@ -150,7 +150,7 @@ export default function Skills() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            A comprehensive toolkit for building modern, scalable web applications
+            Core technical skills for building robust, scalable backend systems
           </motion.p>
         </motion.div>
 

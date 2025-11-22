@@ -42,15 +42,18 @@ export default function Navbar() {
   }, []);
 
   const handleNavClick = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop = element.offsetTop - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
-    }
     setIsOpen(false);
+    
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        const offsetTop = element.offsetTop - 80;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
   };
 
   return (
@@ -58,7 +61,7 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? 'bg-dark-950/90 backdrop-blur-md border-b border-white/10 shadow-lg'
           : 'bg-transparent'
@@ -128,7 +131,9 @@ export default function Navbar() {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg bg-dark-800/50 border border-white/10 hoverable"
+            className="md:hidden p-2 rounded-lg bg-dark-800/50 border border-white/10 hoverable relative z-50"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
@@ -138,16 +143,29 @@ export default function Navbar() {
       {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-dark-950/95 backdrop-blur-md border-t border-white/10 overflow-hidden"
-          >
-            <div className="px-4 py-2 space-y-1">
-              {navItems.map((item, index) => {
-                const Icon = item.icon;
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            
+            {/* Mobile Menu */}
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden bg-dark-950/95 backdrop-blur-md border-t border-white/10 overflow-hidden relative z-50"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="px-4 py-2 space-y-1">
+                {navItems.map((item, index) => {
+                  const Icon = item.icon;
                 const isActive = activeSection === item.href.substring(1);
                 
                 return (
@@ -177,6 +195,7 @@ export default function Navbar() {
               })}
             </div>
           </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.nav>

@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+Allow: /projects
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.pdf$
+
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+Sitemap: https://satyamdwivedi.com.np/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.png$
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
