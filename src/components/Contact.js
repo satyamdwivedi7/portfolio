@@ -85,8 +85,8 @@ export default function Contact() {
         },
         body: JSON.stringify({
           name: formData.name.trim(),
-          email: formData.email.trim(),
-          message: formData.message.trim(),
+          to: formData.email.trim(),
+          messageFromVisitor: formData.message.trim(),
         }),
         signal: controller.signal
       });
