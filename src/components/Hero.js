@@ -187,7 +187,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8"
           >
             <motion.a
-              href="/Resume_Satyam_Dwivedi.pdf"
+              href="/Satyam_Dwivedi_Resume.pdf"
               download
               whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(0, 255, 255, 0.5)" }}
               whileTap={{ scale: 0.95 }}
