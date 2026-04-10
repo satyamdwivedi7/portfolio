@@ -3,6 +3,7 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
+import Certifications from "@/components/Certifications";
 
 export const metadata = {
   title: "Satyam Dwivedi - Full Stack Developer Portfolio",
@@ -49,6 +50,7 @@ export default function Page() {
       <About />
       <Skills />
       <Projects />
+      <Certifications />
       <Contact />
     </div>
   );
