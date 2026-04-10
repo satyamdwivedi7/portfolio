@@ -187,8 +187,9 @@ export default function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8"
           >
             <motion.a
-              href="/Satyam_Dwivedi_Resume.pdf"
-              download
+              href="https://drive.google.com/uc?export=download&id=1EdKBUqNK17hX1oGgIBwzFFWPPo81CItr"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(0, 255, 255, 0.5)" }}
               whileTap={{ scale: 0.95 }}
               className="group relative px-8 py-4 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-lg font-semibold text-dark-950 transition-all duration-300 overflow-hidden hoverable"
