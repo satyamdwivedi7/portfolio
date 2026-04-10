@@ -112,6 +112,51 @@ export async function fetchSkills() {
   }
 }
 
+export async function fetchCertifications() {
+  try {
+    if (typeof window !== 'undefined') {
+      const cachedData = localStorage.getItem('portfolio-certifications');
+      const cacheTimestamp = localStorage.getItem('portfolio-certifications-timestamp');
+      const now = Date.now();
+
+      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp)) < CACHE_DURATION) {
+        return JSON.parse(cachedData);
+      }
+    }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+    const response = await fetch(`${API_BASE_URL}/certifications`, {
+      signal: controller.signal,
+      headers: {
+        'Cache-Control': 'no-cache',
+      }
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch certifications: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolio-certifications', JSON.stringify(data));
+      localStorage.setItem('portfolio-certifications-timestamp', Date.now().toString());
+    }
+
+    return data;
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw new Error('Request timed out. Please check your connection.');
+    }
+    console.error('Error fetching certifications:', err);
+    throw err;
+  }
+}
+
 // Pre-load function for initial page load
 export async function preloadData() {
   try {
