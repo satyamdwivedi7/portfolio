@@ -166,9 +166,9 @@ export default function Contact() {
                     <div className={`p-3 rounded-lg ${getColorClass(method.color, 'bg')} group-hover:scale-110 transition-transform duration-300`}>
                       <Icon size={24} className={getColorClass(method.color)} />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <h4 className="text-white font-semibold mb-1">{method.label}</h4>
-                      <p className={`${getColorClass(method.color)} font-medium`}>{method.value}</p>
+                      <p className={`${getColorClass(method.color)} font-medium break-all`}>{method.value}</p>
                     </div>
                   </motion.a>
                 );

@@ -274,6 +274,8 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://portfolio-api.satyamdwivedi.com.np" />
+        <link rel="preconnect" href="https://satyamdwivedi7.github.io" />
+        <link rel="dns-prefetch" href="https://satyamdwivedi7.github.io" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

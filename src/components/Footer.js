@@ -142,7 +142,7 @@ export default function Footer() {
               </div>
               
               <div className="pt-4 space-y-2 text-sm text-gray-400">
-                <p>📧 contact@satyamdwivedi.com.np</p>
+                <p className="break-all">📧 contact@satyamdwivedi.com.np</p>
                 <p>🌐 Available for freelance work</p>
               </div>
             </div>
