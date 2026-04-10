@@ -96,7 +96,7 @@ export default function Navbar() {
                 alt="Satyam Dwivedi Logo"
                 width={40}
                 height={40}
-                style={{ width: 'auto', height: '40px' }}
+                className="h-10 w-auto"
                 priority
               />
             </a>

@@ -68,7 +68,7 @@ export default function Footer() {
                   alt="Satyam Dwivedi Logo"
                   width={48}
                   height={48}
-                  style={{ width: 'auto', height: '48px' }}
+                  className="h-12 w-auto"
                 />
               </motion.div>
               <div>
