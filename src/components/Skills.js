@@ -52,7 +52,7 @@ export default function Skills() {
             color: defaultCategory.color,
             skills: category.skillSet.map(skill => ({
               name: skill,
-              level: Math.floor(Math.random() * 20) + 80, // Random level between 80-100
+              level: (skill.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % 11) + 85,
               description: getSkillDescription(skill)
             }))
           };

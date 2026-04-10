@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Download, Github, Linkedin, Twitter, Mail, Code, Zap, Sparkles } from 'lucide-react';
+import { ChevronDown, Download, Mail, Code, Zap, Sparkles } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, TwitterIcon } from '@/components/SocialIcons';
 
 const roles = [
   'Software Development Engineer',
@@ -74,9 +75,9 @@ export default function Hero() {
   };
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/satyamdwivedi7', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/satyam7579', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com/satyam_7579', label: 'Twitter' },
+    { icon: GithubIcon, href: 'https://github.com/satyamdwivedi7', label: 'GitHub' },
+    { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/satyam7579', label: 'LinkedIn' },
+    { icon: TwitterIcon, href: 'https://twitter.com/satyam_7579', label: 'Twitter' },
     { icon: Mail, href: 'mailto:contact@satyamdwivedi.com.np', label: 'Email' },
   ];
 

@@ -1,13 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart, Code, Coffee, ArrowUp, Github, Linkedin, Twitter, Instagram, Mail } from 'lucide-react';
+import { Heart, Code, Coffee, ArrowUp, Mail } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from '@/components/SocialIcons';
+import Image from 'next/image';
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/satyamdwivedi7', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/satyam7579', label: 'LinkedIn' },
-  { icon: Twitter, href: 'https://twitter.com/satyam_7579', label: 'Twitter' },
-  { icon: Instagram, href: 'https://instagram.com/satyam_7579', label: 'Instagram' },
+  { icon: GithubIcon, href: 'https://github.com/satyamdwivedi7', label: 'GitHub' },
+  { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/satyam7579', label: 'LinkedIn' },
+  { icon: TwitterIcon, href: 'https://twitter.com/satyam_7579', label: 'Twitter' },
+  { icon: InstagramIcon, href: 'https://instagram.com/satyam_7579', label: 'Instagram' },
   { icon: Mail, href: 'mailto:contact@satyamdwivedi.com.np', label: 'Email' },
 ];
 
@@ -16,6 +18,7 @@ const quickLinks = [
   { name: 'About', href: '#about' },
   { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
+  { name: 'Certifications', href: '#certifications' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -59,15 +62,18 @@ export default function Footer() {
             className="lg:col-span-2 space-y-6"
           >
             <div className="flex items-center space-x-3">
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className="text-3xl font-bold font-mono"
-              >
-                <span className="gradient-text">&lt;SD/&gt;</span>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Image
+                  src="https://satyamdwivedi7.github.io/Images/logo.webp"
+                  alt="Satyam Dwivedi Logo"
+                  width={48}
+                  height={48}
+                  style={{ width: 'auto', height: '48px' }}
+                />
               </motion.div>
               <div>
                 <h3 className="text-xl font-bold text-white">Satyam Dwivedi</h3>
-                <p className="text-neon-cyan font-medium">Full Stack Developer</p>
+                <p className="text-neon-cyan font-medium">Software Development Engineer</p>
               </div>
             </div>
             
@@ -137,7 +143,6 @@ export default function Footer() {
               
               <div className="pt-4 space-y-2 text-sm text-gray-400">
                 <p>📧 contact@satyamdwivedi.com.np</p>
-                <p>📍 Vellore, Tamil Nadu</p>
                 <p>🌐 Available for freelance work</p>
               </div>
             </div>

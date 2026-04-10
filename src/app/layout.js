@@ -23,7 +23,7 @@ export const metadata = {
     default: 'Satyam Dwivedi | Software Development Engineer | Backend & System Design',
     template: '%s | Satyam Dwivedi'
   },
-  description: 'Satyam Dwivedi is a Software Development Engineer from VIT Vellore, specializing in backend development, system design, data structures & algorithms, and building scalable distributed systems. Expert in Java, Python, Node.js, and database optimization.',
+  description: 'Satyam Dwivedi is a Software Development Engineer specializing in backend development, system design, data structures & algorithms, and building scalable distributed systems. Expert in Java, Python, Node.js, and database optimization.',
   applicationName: 'Satyam Dwivedi Portfolio',
   authors: [
     { 
@@ -40,7 +40,6 @@ export const metadata = {
   },
   keywords: [
     'Satyam Dwivedi',
-    'Satyam Dwivedi VIT',
     'Satyam Dwivedi SDE',
     'Satyam Dwivedi Portfolio',
     'Software Development Engineer',
@@ -52,8 +51,6 @@ export const metadata = {
     'Python Developer',
     'Java Developer',
     'Database Optimization',
-    'VIT Vellore Developer',
-    'Software Engineer India',
     'Distributed Systems',
     'Scalable Architecture',
     'API Development',
@@ -69,7 +66,7 @@ export const metadata = {
     url: 'https://satyamdwivedi.com.np',
     siteName: 'Satyam Dwivedi Portfolio',
     title: 'Satyam Dwivedi | Software Development Engineer | Backend & System Design',
-    description: 'Satyam Dwivedi is a Software Development Engineer from VIT Vellore, specializing in backend development, system design, data structures & algorithms, and building scalable distributed systems.',
+    description: 'Satyam Dwivedi is a Software Development Engineer specializing in backend development, system design, data structures & algorithms, and building scalable distributed systems.',
     images: [
       {
         url: '/satyam-dwivedi.webp',
@@ -96,7 +93,7 @@ export const metadata = {
     site: '@satyam_7579',
     creator: '@satyam_7579',
     title: 'Satyam Dwivedi | Software Development Engineer',
-    description: 'Satyam Dwivedi is a Software Development Engineer from VIT Vellore. Expert in backend development, system design, and scalable architecture.',
+    description: 'Satyam Dwivedi is a Software Development Engineer. Expert in backend development, system design, and scalable architecture.',
     images: ['/satyam-dwivedi.webp'],
   },
   robots: {
@@ -137,7 +134,7 @@ export default function RootLayout({ children }) {
     "@type": "Person",
     "@id": "https://satyamdwivedi.com.np/#person",
     name: "Satyam Dwivedi",
-    alternateName: ["Satyam", "Satyam Dwivedi VIT", "Satyam Dwivedi SDE"],
+    alternateName: ["Satyam", "Satyam Dwivedi SDE"],
     url: "https://satyamdwivedi.com.np",
     image: {
       "@type": "ImageObject",
@@ -147,30 +144,12 @@ export default function RootLayout({ children }) {
       caption: "Satyam Dwivedi - Software Development Engineer"
     },
     jobTitle: "Software Development Engineer",
-    worksFor: {
-      "@type": "EducationalOrganization",
-      name: "Vellore Institute of Technology",
-      url: "https://vit.ac.in",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Vellore",
-        addressRegion: "Tamil Nadu",
-        addressCountry: "IN"
-      }
-    },
     alumniOf: {
       "@type": "EducationalOrganization",
       name: "Vellore Institute of Technology",
       url: "https://vit.ac.in"
     },
     email: "contact@satyamdwivedi.com.np",
-    telephone: "+91-8438913057",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Vellore",
-      addressRegion: "Tamil Nadu",
-      addressCountry: "IN"
-    },
     nationality: {
       "@type": "Country",
       name: "India"
@@ -205,7 +184,6 @@ export default function RootLayout({ children }) {
       "https://github.com/satyamdwivedi7",
       "https://linkedin.com/in/satyam7579",
       "https://x.com/satyam_7579",
-      "https://twitter.com/satyam_7579",
       "https://www.instagram.com/satyam_7579",
       "https://www.facebook.com/satyam7579"
     ],
@@ -267,6 +245,12 @@ export default function RootLayout({ children }) {
         {
           "@type": "ListItem",
           position: 4,
+          name: "Certifications",
+          item: "https://satyamdwivedi.com.np#certifications"
+        },
+        {
+          "@type": "ListItem",
+          position: 5,
           name: "Contact",
           item: "https://satyamdwivedi.com.np#contact"
         }
@@ -286,10 +270,6 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Satyam Dwivedi" />
-        <meta name="geo.region" content="IN-TN" />
-        <meta name="geo.placename" content="Vellore" />
-        <meta name="geo.position" content="12.9699;79.1632" />
-        <meta name="ICBM" content="12.9699, 79.1632" />
         <link rel="canonical" href="https://satyamdwivedi.com.np" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

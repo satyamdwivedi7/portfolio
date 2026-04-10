@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Coffee, Code2, Heart, Star, Zap } from 'lucide-react';
+import { Calendar, Coffee, Code2, Heart, Star, Zap } from 'lucide-react';
 import Image from 'next/image';
 
 const stats = [
@@ -105,15 +105,6 @@ export default function About() {
             className="relative"
           >
             <div className="relative w-full max-w-md mx-auto">
-              {/* Animated border - now matches image size exactly */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-2xl bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink p-1"
-              >
-                <div className="w-full h-full bg-dark-950 rounded-2xl" />
-              </motion.div>
-              
               {/* Profile Image */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
@@ -134,28 +125,6 @@ export default function About() {
                 </div>
               </motion.div>
 
-              {/* Floating elements around image */}
-              {[...Array(4)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  animate={{
-                    y: [0, -20, 0],
-                    rotate: [0, 180, 360],
-                  }}
-                  transition={{
-                    duration: 4 + i,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.5,
-                  }}
-                  className={`absolute w-8 h-8 rounded-full ${getColorClass(['neon-cyan', 'neon-purple', 'neon-pink', 'neon-green'][i], 'bg')} opacity-20`}
-                  style={{
-                    left: i % 2 === 0 ? '-10px' : 'auto',
-                    right: i % 2 === 1 ? '-10px' : 'auto',
-                    top: `${20 + i * 20}%`,
-                  }}
-                />
-              ))}
             </div>
           </motion.div>
 
@@ -169,11 +138,6 @@ export default function About() {
           >
             {/* Introduction */}
             <motion.div variants={itemVariants} className="space-y-6">
-              <div className="flex items-center space-x-3 text-neon-cyan">
-                <MapPin size={24} />
-                <span className="text-lg font-medium">Based in Nepal</span>
-              </div>
-              
               <div className="space-y-4 text-gray-300 leading-relaxed">
                 <p className="text-lg">
                   Hello! I'm <span className="text-neon-cyan font-semibold">Satyam Dwivedi</span>, 

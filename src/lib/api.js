@@ -60,7 +60,6 @@ export async function fetchProjects() {
     if (err.name === 'AbortError') {
       throw new Error('Request timed out. Please check your connection.');
     }
-    console.error('Error fetching projects:', err);
     throw err;
   }
 }
@@ -107,7 +106,6 @@ export async function fetchSkills() {
     if (err.name === 'AbortError') {
       throw new Error('Request timed out. Please check your connection.');
     }
-    console.error('Error fetching skills:', err);
     throw err;
   }
 }
@@ -152,31 +150,21 @@ export async function fetchCertifications() {
     if (err.name === 'AbortError') {
       throw new Error('Request timed out. Please check your connection.');
     }
-    console.error('Error fetching certifications:', err);
     throw err;
   }
 }
 
 // Pre-load function for initial page load
 export async function preloadData() {
-  try {
-    const [projects, skills, certifications] = await Promise.all([
-      fetchProjects(),
-      fetchSkills(),
-      fetchCertifications()
-    ]);
+  const results = await Promise.allSettled([
+    fetchProjects(),
+    fetchSkills(),
+    fetchCertifications()
+  ]);
 
-    return {
-      projects,
-      skills,
-      certifications
-    };
-  } catch (error) {
-    console.error('Error preloading data:', error);
-    return {
-      projects: [],
-      skills: [],
-      certifications: []
-    };
-  }
+  return {
+    projects: results[0].status === 'fulfilled' ? results[0].value : [],
+    skills: results[1].status === 'fulfilled' ? results[1].value : [],
+    certifications: results[2].status === 'fulfilled' ? results[2].value : [],
+  };
 }

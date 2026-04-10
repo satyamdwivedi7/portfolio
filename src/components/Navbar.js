@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Code2, User, Briefcase, Mail, Home, Award } from 'lucide-react';
+import Image from 'next/image';
 
 const navItems = [
   { name: 'Home', href: '#home', icon: Home },
@@ -43,19 +44,24 @@ export default function Navbar() {
   }, []);
 
   const handleNavClick = (href) => {
+    const wasOpen = isOpen;
     setIsOpen(false);
     setActiveSection(href.substring(1));
 
-    setTimeout(() => {
+    const scroll = () => {
       const element = document.querySelector(href);
       if (element) {
         const offsetTop = element.offsetTop - 80;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
       }
-    }, 100);
+    };
+
+    // On mobile, wait for the menu close animation before scrolling
+    if (wasOpen) {
+      setTimeout(scroll, 300);
+    } else {
+      scroll();
+    }
   };
 
   return (
@@ -83,9 +89,16 @@ export default function Navbar() {
                 e.preventDefault();
                 handleNavClick('#home');
               }}
-              className="text-2xl font-bold font-mono hoverable"
+              className="hoverable"
             >
-              <span className="gradient-text">&lt;SD/&gt;</span>
+              <Image
+                src="https://satyamdwivedi7.github.io/Images/logo.webp"
+                alt="Satyam Dwivedi Logo"
+                width={40}
+                height={40}
+                style={{ width: 'auto', height: '40px' }}
+                priority
+              />
             </a>
           </motion.div>
 
