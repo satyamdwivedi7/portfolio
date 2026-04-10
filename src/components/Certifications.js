@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import { fetchCertifications } from '@/lib/api';
 
 const accentColors = {
@@ -35,7 +36,7 @@ function CertCard({ cert }) {
     >
       <div className="w-14 h-14 rounded-2xl bg-slate-200 flex items-center justify-center overflow-hidden p-2 shadow-md shadow-black/30">
         {cert.icon
-          ? <img src={cert.icon} alt={cert.issuer} className="w-full h-full object-contain" />
+          ? <Image src={cert.icon} alt={cert.issuer} width={48} height={48} unoptimized className="w-full h-full object-contain" />
           : <span className="text-3xl">🏅</span>
         }
       </div>

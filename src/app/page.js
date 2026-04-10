@@ -6,38 +6,39 @@ import Contact from "@/components/Contact";
 import Certifications from "@/components/Certifications";
 
 export const metadata = {
-  title: "Satyam Dwivedi - Full Stack Developer Portfolio",
+  title: "Satyam Dwivedi - Software Development Engineer Portfolio",
   description:
-    "Innovative Full Stack Developer specializing in MERN stack, Next.js, and cutting-edge web technologies. Explore my projects and let's build something amazing together.",
+    "Satyam Dwivedi is a Software Development Engineer specializing in backend development, system design, and scalable web technologies. Explore projects and get in touch.",
   openGraph: {
-    title: "Satyam Dwivedi - Full Stack Developer Portfolio",
+    title: "Satyam Dwivedi - Software Development Engineer Portfolio",
     description:
-      "Innovative Full Stack Developer crafting exceptional digital experiences with modern web technologies.",
+      "Satyam Dwivedi is a Software Development Engineer building scalable backend systems and modern web applications.",
     url: "https://satyamdwivedi.com.np",
     images: [
       {
         url: "https://satyamdwivedi.com.np/satyam-dwivedi.webp",
         width: 1200,
         height: 630,
-        alt: "Satyam Dwivedi - Portfolio",
+        alt: "Satyam Dwivedi - Software Development Engineer Portfolio",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    site: "https://twitter.com/satyam_7579",
+    site: "@satyam_7579",
     creator: "@satyam_7579",
   },
   keywords: [
-    "Full Stack Developer",
+    "Satyam Dwivedi",
+    "Software Development Engineer",
+    "Backend Developer",
+    "System Design",
     "React.js",
     "Next.js",
     "Node.js",
-    "MERN Stack",
     "Web Development",
     "Portfolio",
-    "Satyam Dwivedi"
   ],
   authors: [{ name: "Satyam Dwivedi" }],
   creator: "Satyam Dwivedi",
