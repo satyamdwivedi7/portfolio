@@ -44,7 +44,8 @@ export default function Navbar() {
 
   const handleNavClick = (href) => {
     setIsOpen(false);
-    
+    setActiveSection(href.substring(1));
+
     setTimeout(() => {
       const element = document.querySelector(href);
       if (element) {
