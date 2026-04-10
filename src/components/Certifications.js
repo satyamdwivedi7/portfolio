@@ -33,7 +33,7 @@ function CertCard({ cert }) {
       }}
       className={`flex flex-col items-center text-center p-6 rounded-2xl glass border ${accent.border} gap-3`}
     >
-      <div className="w-14 h-14 rounded-2xl bg-white/95 flex items-center justify-center overflow-hidden p-2 shadow-md shadow-black/30">
+      <div className="w-14 h-14 rounded-2xl bg-slate-200 flex items-center justify-center overflow-hidden p-2 shadow-md shadow-black/30">
         {cert.icon
           ? <img src={cert.icon} alt={cert.issuer} className="w-full h-full object-contain" />
           : <span className="text-3xl">🏅</span>
