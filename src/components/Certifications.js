@@ -34,21 +34,23 @@ function CertCard({ cert }) {
       className={`flex flex-col items-center text-center p-6 rounded-2xl glass border ${accent.border} gap-3`}
     >
       <div className="w-14 h-14 rounded-full bg-dark-800 flex items-center justify-center text-3xl">
-        {cert.icon}
+        {cert.icon || '🏅'}
       </div>
       <div>
         <h3 className="text-sm font-bold text-white leading-tight">{cert.title}</h3>
         <p className="text-xs text-gray-400 mt-1">{cert.issuer}</p>
         <p className="text-xs text-gray-600 mt-1">{cert.issuedDate}</p>
       </div>
-      <a
-        href={cert.credentialUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`text-xs px-4 py-1.5 rounded-full transition-colors duration-200 ${accent.button}`}
-      >
-        View Certificate ↗
-      </a>
+      {cert.credentialUrl && (
+        <a
+          href={cert.credentialUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`text-xs px-4 py-1.5 rounded-full transition-colors duration-200 ${accent.button}`}
+        >
+          View Certificate ↗
+        </a>
+      )}
     </motion.div>
   );
 }
