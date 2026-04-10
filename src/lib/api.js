@@ -160,20 +160,23 @@ export async function fetchCertifications() {
 // Pre-load function for initial page load
 export async function preloadData() {
   try {
-    const [projects, skills] = await Promise.all([
+    const [projects, skills, certifications] = await Promise.all([
       fetchProjects(),
-      fetchSkills()
+      fetchSkills(),
+      fetchCertifications()
     ]);
-    
+
     return {
       projects,
-      skills
+      skills,
+      certifications
     };
   } catch (error) {
     console.error('Error preloading data:', error);
     return {
       projects: [],
-      skills: []
+      skills: [],
+      certifications: []
     };
   }
 }
