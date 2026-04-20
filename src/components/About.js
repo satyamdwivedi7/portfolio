@@ -54,15 +54,23 @@ export default function About() {
     },
   };
 
-  const getColorClass = (color, type = 'text') => {
-    const colors = {
-      'neon-cyan': type === 'text' ? 'text-neon-cyan' : type === 'border' ? 'border-neon-cyan' : 'bg-neon-cyan/20',
-      'neon-purple': type === 'text' ? 'text-neon-purple' : type === 'border' ? 'border-neon-purple' : 'bg-neon-purple/20',
-      'neon-pink': type === 'text' ? 'text-neon-pink' : type === 'border' ? 'border-neon-pink' : 'bg-neon-pink/20',
-      'neon-green': type === 'text' ? 'text-neon-green' : type === 'border' ? 'border-neon-green' : 'bg-neon-green/20',
-    };
-    return colors[color] || colors['neon-cyan'];
+  // Static, Tailwind-safe class maps — never build class names dynamically
+  // so the purger can always find these strings.
+  const textColorMap = {
+    'neon-cyan':   'text-neon-cyan',
+    'neon-purple': 'text-neon-purple',
+    'neon-pink':   'text-neon-pink',
+    'neon-green':  'text-neon-green',
   };
+  const bgColorMap = {
+    'neon-cyan':   'bg-neon-cyan/20',
+    'neon-purple': 'bg-neon-purple/20',
+    'neon-pink':   'bg-neon-pink/20',
+    'neon-green':  'bg-neon-green/20',
+  };
+
+  const getTextColor = (color) => textColorMap[color] || textColorMap['neon-cyan'];
+  const getBgColor   = (color) => bgColorMap[color]   || bgColorMap['neon-cyan'];
 
   return (
     <section id="about" className="py-20 relative overflow-hidden">
@@ -172,8 +180,8 @@ export default function About() {
                       variants={itemVariants}
                       className="flex items-start space-x-4 p-4 rounded-lg glass hover:bg-dark-800/50 transition-all duration-300"
                     >
-                      <div className={`p-2 rounded-lg ${getColorClass(highlight.color, 'bg')}`}>
-                        <Icon size={24} className={getColorClass(highlight.color)} />
+                      <div className={`p-2 rounded-lg ${getBgColor(highlight.color)}`}>
+                        <Icon size={24} className={getTextColor(highlight.color)} />
                       </div>
                       <div>
                         <h4 className="text-lg font-semibold text-white mb-1">
@@ -208,11 +216,11 @@ export default function About() {
               >
                 <div className="relative p-6 rounded-xl glass hover:bg-dark-800/50 transition-all duration-300">
                   {/* Background glow */}
-                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${getColorClass(stat.color, 'bg')} blur-xl rounded-xl`} />
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${getBgColor(stat.color)} blur-xl rounded-xl`} />
                   
                   <div className="relative z-10">
-                    <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${getColorClass(stat.color, 'bg')} flex items-center justify-center`}>
-                      <Icon size={32} className={getColorClass(stat.color)} />
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${getBgColor(stat.color)} flex items-center justify-center`}>
+                      <Icon size={32} className={getTextColor(stat.color)} />
                     </div>
                     
                     <motion.div
@@ -220,7 +228,7 @@ export default function About() {
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className={`text-3xl font-bold mb-2 ${getColorClass(stat.color)}`}
+                      className={`text-3xl font-bold mb-2 ${getTextColor(stat.color)}`}
                     >
                       {stat.value}
                     </motion.div>

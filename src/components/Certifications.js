@@ -1,11 +1,11 @@
 // src/components/Certifications.js
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
-import { fetchCertifications } from '@/lib/api';
+import { DataContext } from '@/components/DataProvider';
 
 const accentColors = {
   'cloud-ai': {
@@ -60,30 +60,7 @@ function CertCard({ cert }) {
 }
 
 export default function Certifications() {
-  const [certifications, setCertifications] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    const load = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchCertifications();
-        if (isMounted) {
-          setCertifications(data);
-          setError(null);
-        }
-      } catch (err) {
-        console.error('Error fetching certifications:', err);
-        if (isMounted) setError(err.message);
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
-    load();
-    return () => { isMounted = false; };
-  }, []);
+  const { certifications, isLoading: loading } = useContext(DataContext);
 
   return (
     <section id="certifications" className="py-20 relative overflow-hidden">
@@ -115,23 +92,8 @@ export default function Certifications() {
           </motion.div>
         )}
 
-        {/* Error State */}
-        {error && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
-            <div className="text-6xl mb-4">⚠️</div>
-            <h3 className="text-2xl font-bold text-white mb-2">Error Loading Certifications</h3>
-            <p className="text-gray-400 mb-4">{error}</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-neon-cyan text-dark-950 rounded-lg font-semibold hover:bg-neon-cyan/90 transition-colors duration-300"
-            >
-              Try Again
-            </button>
-          </motion.div>
-        )}
-
         {/* Empty State */}
-        {!loading && !error && certifications.length === 0 && (
+        {!loading && certifications.length === 0 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
             <div className="text-6xl mb-4">🏅</div>
             <h3 className="text-2xl font-bold text-white mb-2">No Certifications Yet</h3>
@@ -140,7 +102,7 @@ export default function Certifications() {
         )}
 
         {/* Certification Cards Grid */}
-        {!loading && !error && certifications.length > 0 && (
+        {!loading && certifications.length > 0 && (
           <motion.div
             variants={{
               hidden: { opacity: 0 },

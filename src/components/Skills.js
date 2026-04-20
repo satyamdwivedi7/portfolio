@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Code, Database, Globe, Smartphone, Server, Zap, Palette, Settings, Loader2 } from 'lucide-react';
-import { fetchSkills } from '@/lib/api';
+import { DataContext } from '@/components/DataProvider';
 
 // Default skill categories with icons and colors
 const defaultCategories = [
@@ -28,53 +28,11 @@ const defaultCategories = [
 ];
 
 export default function Skills() {
+  const { skills: rawSkills, isLoading: loading } = useContext(DataContext);
   const [activeCategory, setActiveCategory] = useState('libraries');
   const [hoveredSkill, setHoveredSkill] = useState(null);
-  const [skillCategories, setSkillCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  // Fetch skills from API
-  useEffect(() => {
-    const loadSkills = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchSkills();
-        
-        // Transform API data to match component structure
-        const transformedSkills = data.map((category, index) => {
-          const defaultCategory = defaultCategories[index] || defaultCategories[0];
-          
-          return {
-            id: category.title.toLowerCase(),
-            title: category.title,
-            icon: defaultCategory.icon,
-            color: defaultCategory.color,
-            skills: category.skillSet.map(skill => ({
-              name: skill,
-              level: (skill.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % 11) + 85,
-              description: getSkillDescription(skill)
-            }))
-          };
-        });
-        
-        setSkillCategories(transformedSkills);
-        if (transformedSkills.length > 0) {
-          setActiveCategory(transformedSkills[0].id);
-        }
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching skills:', err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadSkills();
-  }, []);
-
-  // Helper function to generate skill descriptions
+  // Must be defined before skillCategories — const is NOT hoisted
   const getSkillDescription = (skillName) => {
     const descriptions = {
       'React.Js': 'Building dynamic user interfaces',
@@ -88,6 +46,22 @@ export default function Skills() {
     };
     return descriptions[skillName] || 'Professional expertise';
   };
+
+  // Transform API skills data to component structure
+  const skillCategories = rawSkills.map((category, index) => {
+    const defaultCategory = defaultCategories[index] || defaultCategories[0];
+    return {
+      id: category.title.toLowerCase(),
+      title: category.title,
+      icon: defaultCategory.icon,
+      color: defaultCategory.color,
+      skills: category.skillSet.map(skill => ({
+        name: skill,
+        level: (skill.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % 11) + 85,
+        description: getSkillDescription(skill),
+      })),
+    };
+  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -110,15 +84,30 @@ export default function Skills() {
     },
   };
 
-  const getColorClass = (color, type = 'text') => {
-    const colors = {
-      'neon-cyan': type === 'text' ? 'text-neon-cyan' : 'from-neon-cyan/20 to-neon-cyan/40',
-      'neon-purple': type === 'text' ? 'text-neon-purple' : 'from-neon-purple/20 to-neon-purple/40',
-      'neon-pink': type === 'text' ? 'text-neon-pink' : 'from-neon-pink/20 to-neon-pink/40',
-      'neon-green': type === 'text' ? 'text-neon-green' : 'from-neon-green/20 to-neon-green/40',
-    };
-    return colors[color] || colors['neon-cyan'];
+  // Static, Tailwind-safe class maps — never build class names dynamically
+  // so the purger can always find these strings.
+  const textColorMap = {
+    'neon-cyan':    'text-neon-cyan',
+    'neon-purple':  'text-neon-purple',
+    'neon-pink':    'text-neon-pink',
+    'neon-green':   'text-neon-green',
   };
+  const gradientMap = {
+    'neon-cyan':   'from-neon-cyan/20 to-neon-cyan/40',
+    'neon-purple': 'from-neon-purple/20 to-neon-purple/40',
+    'neon-pink':   'from-neon-pink/20 to-neon-pink/40',
+    'neon-green':  'from-neon-green/20 to-neon-green/40',
+  };
+  const barGradientMap = {
+    'neon-cyan':   'from-neon-cyan to-blue-400',
+    'neon-purple': 'from-neon-purple to-purple-400',
+    'neon-pink':   'from-neon-pink to-pink-400',
+    'neon-green':  'from-neon-green to-green-400',
+  };
+
+  const getTextColor   = (color) => textColorMap[color]   || textColorMap['neon-cyan'];
+  const getGradient    = (color) => gradientMap[color]    || gradientMap['neon-cyan'];
+  const getBarGradient = (color) => barGradientMap[color] || barGradientMap['neon-cyan'];
 
   const activeSkills = skillCategories.find(cat => cat.id === activeCategory)?.skills || [];
   const activeCategoryData = skillCategories.find(cat => cat.id === activeCategory);
@@ -174,7 +163,7 @@ export default function Skills() {
                 whileTap={{ scale: 0.95 }}
                 className={`flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 hoverable ${
                   isActive
-                    ? `bg-gradient-to-r ${getColorClass(category.color, 'gradient')} border border-white/20 text-white shadow-lg`
+                    ? `bg-gradient-to-r ${getGradient(category.color)} border border-white/20 text-white shadow-lg`
                     : 'bg-dark-800/50 border border-white/10 text-gray-400 hover:text-white hover:border-white/20'
                 }`}
               >
@@ -199,27 +188,9 @@ export default function Skills() {
           </motion.div>
         )}
 
-        {/* Error State */}
-        {error && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-16"
-          >
-            <div className="text-6xl mb-4">⚠️</div>
-            <h3 className="text-2xl font-bold text-white mb-2">Error Loading Skills</h3>
-            <p className="text-gray-400 mb-4">{error}</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-neon-cyan text-dark-950 rounded-lg font-semibold hover:bg-neon-cyan/90 transition-colors duration-300"
-            >
-              Try Again
-            </button>
-          </motion.div>
-        )}
 
         {/* Skills Display */}
-        {!loading && !error && (
+        {!loading && (
           <motion.div
             key={activeCategory}
             variants={containerVariants}
@@ -237,18 +208,18 @@ export default function Skills() {
             >
               {/* Background glow effect */}
               <div
-                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r ${getColorClass(activeCategoryData?.color, 'gradient')} blur-xl`}
+                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r ${getGradient(activeCategoryData?.color)} blur-xl`}
               />
               
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h3 className={`text-xl font-semibold mb-1 ${getColorClass(activeCategoryData?.color)}`}>
+                    <h3 className={`text-xl font-semibold mb-1 ${getTextColor(activeCategoryData?.color)}`}>
                       {skill.name}
                     </h3>
                     <p className="text-sm text-gray-400">{skill.description}</p>
                   </div>
-                  <span className={`text-lg font-mono font-bold ${getColorClass(activeCategoryData?.color)}`}>
+                  <span className={`text-lg font-mono font-bold ${getTextColor(activeCategoryData?.color)}`}>
                     {skill.level}%
                   </span>
                 </div>
@@ -260,12 +231,7 @@ export default function Skills() {
                       initial={{ width: 0 }}
                       animate={{ width: `${skill.level}%` }}
                       transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
-                      className={`h-full bg-gradient-to-r ${
-                        activeCategoryData?.color === 'neon-cyan' ? 'from-neon-cyan to-blue-400' :
-                        activeCategoryData?.color === 'neon-purple' ? 'from-neon-purple to-purple-400' :
-                        activeCategoryData?.color === 'neon-pink' ? 'from-neon-pink to-pink-400' :
-                        'from-neon-green to-green-400'
-                      } relative`}
+                      className={`h-full bg-gradient-to-r ${getBarGradient(activeCategoryData?.color)} relative`}
                     >
                       {/* Animated shine effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
@@ -280,12 +246,7 @@ export default function Skills() {
                       exit={{ scale: 0, opacity: 0 }}
                       className="absolute -top-1 -right-1 w-4 h-4"
                     >
-                      <div className={`w-full h-full bg-gradient-to-r ${
-                        activeCategoryData?.color === 'neon-cyan' ? 'from-neon-cyan to-blue-400' :
-                        activeCategoryData?.color === 'neon-purple' ? 'from-neon-purple to-purple-400' :
-                        activeCategoryData?.color === 'neon-pink' ? 'from-neon-pink to-pink-400' :
-                        'from-neon-green to-green-400'
-                      } rounded-full animate-ping`} />
+                      <div className={`w-full h-full bg-gradient-to-r ${getBarGradient(activeCategoryData?.color)} rounded-full animate-ping`} />
                     </motion.div>
                   )}
                 </div>

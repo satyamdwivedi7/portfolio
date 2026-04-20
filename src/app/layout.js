@@ -204,11 +204,6 @@ export default function RootLayout({ children }) {
       "@id": "https://satyamdwivedi.com.np/#person"
     },
     inLanguage: "en-US",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://satyamdwivedi.com.np/?s={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
   };
 
   const profilePageSchema = {

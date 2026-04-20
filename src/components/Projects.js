@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Play, X, Loader2, Eye } from 'lucide-react';
 import { GithubIcon } from '@/components/SocialIcons';
 import Image from 'next/image';
-import { fetchProjects } from '@/lib/api';
+import { DataContext } from '@/components/DataProvider';
 
 const getStatusColor = (status) => {
   switch (status) {
@@ -122,41 +122,9 @@ function ProjectCard({ project, onSelect }) {
 
 
 export default function Projects() {
+  const { projects, isLoading: loading } = useContext(DataContext);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [projects, setProjects] = useState([]);
   const [showAllProjects, setShowAllProjects] = useState(false); // Show featured (3) by default
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Load projects only once on mount
-  useEffect(() => {
-    let isMounted = true;
-    
-    const loadProjects = async () => {
-      try {
-        setLoading(true);
-        const projectData = await fetchProjects();
-
-        if (isMounted) {
-          setProjects(projectData);
-          setError(null);
-        }
-      } catch (err) {
-        console.error('Error fetching projects:', err);
-        if (isMounted) {
-          setError(err.message);
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
-    };
-
-    loadProjects();
-    
-    return () => { isMounted = false; };
-  }, []);
 
   // Simpler, more robust scroll lock for modal
   useEffect(() => {
@@ -304,8 +272,8 @@ export default function Projects() {
           </motion.div>
         )}
 
-        {/* Error State */}
-        {error && (
+        {/* Empty State (after loading with no results) */}
+        {!loading && projects.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

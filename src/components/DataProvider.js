@@ -8,7 +8,8 @@ export const DataContext = createContext();
 export default function DataProvider({ children }) {
   const [data, setData] = useState({
     projects: [],
-    skills: []
+    skills: [],
+    certifications: [],
   });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,7 +31,8 @@ export default function DataProvider({ children }) {
   const contextValue = {
     projects: data.projects,
     skills: data.skills,
-    isLoading
+    certifications: data.certifications,
+    isLoading,
   };
 
   return (

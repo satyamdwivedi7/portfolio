@@ -1,157 +1,118 @@
 // API utilities for data fetching
-const API_BASE_URL = 'https://portfolio-api.satyamdwivedi.com.np';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 // Cache duration (5 minutes)
 const CACHE_DURATION = 5 * 60 * 1000;
 
-export async function fetchProjects() {
+// Bump this string whenever the shape of cached data changes.
+// It is appended to every localStorage key, so old keys are simply
+// ignored and the browser naturally re-fetches fresh data.
+const CACHE_VERSION = 'v2';
+
+function cacheKey(name) {
+  return `portfolio-${name}-${CACHE_VERSION}`;
+}
+
+function readCache(name) {
+  if (typeof window === 'undefined') return null;
   try {
-    // Check for cached data first
-    if (typeof window !== 'undefined') {
-      const cachedData = localStorage.getItem('portfolio-projects');
-      const cacheTimestamp = localStorage.getItem('portfolio-projects-timestamp');
-      const now = Date.now();
-      
-      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp)) < CACHE_DURATION) {
-        return JSON.parse(cachedData);
-      }
+    const raw = localStorage.getItem(cacheKey(name));
+    const ts = localStorage.getItem(`${cacheKey(name)}-timestamp`);
+    if (raw && ts && Date.now() - parseInt(ts) < CACHE_DURATION) {
+      return JSON.parse(raw);
     }
-    
-    // Create abort controller for timeout
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-    
-    const response = await fetch(`${API_BASE_URL}/projects?filter=all`, {
+  } catch {
+    // corrupt JSON – ignore
+  }
+  return null;
+}
+
+function writeCache(name, data) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(cacheKey(name), JSON.stringify(data));
+    localStorage.setItem(`${cacheKey(name)}-timestamp`, Date.now().toString());
+  } catch {
+    // storage full or private-mode – ignore
+  }
+}
+
+async function fetchWithTimeout(url, timeoutMs = 10000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, {
       signal: controller.signal,
-      headers: {
-        'Cache-Control': 'no-cache',
-      }
+      headers: { 'Cache-Control': 'no-cache' },
     });
-    
-    clearTimeout(timeoutId);
-    
-    if (!response.ok) {
-      throw new Error(`Failed to fetch projects: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    
-    // Transform API data
-    const transformedProjects = data.map((project) => ({
-      id: project._id,
-      title: project.title,
-      description: project.description,
-      image: project.image,
-      technologies: project.techStack || [],
-      category: project.techStack?.[0] || 'Project',
-      demoUrl: project.live,
-      githubUrl: project.github,
-      status: 'Completed'
-    }));
-    
-    // Cache the transformed data (only in browser)
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('portfolio-projects', JSON.stringify(transformedProjects));
-      localStorage.setItem('portfolio-projects-timestamp', Date.now().toString());
-    }
-    
-    return transformedProjects;
+    clearTimeout(id);
+    return response;
   } catch (err) {
+    clearTimeout(id);
     if (err.name === 'AbortError') {
       throw new Error('Request timed out. Please check your connection.');
     }
     throw err;
   }
+}
+
+export async function fetchProjects() {
+  const cached = readCache('projects');
+  if (cached) return cached;
+
+  const response = await fetchWithTimeout(`${API_BASE_URL}/projects?filter=all`);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch projects: ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  // Transform API data
+  const transformedProjects = data.map((project) => ({
+    id: project._id,
+    title: project.title,
+    description: project.description,
+    image: project.image,
+    technologies: project.techStack || [],
+    category: project.techStack?.[0] || 'Project',
+    demoUrl: project.live,
+    githubUrl: project.github,
+    status: 'Completed',
+  }));
+
+  writeCache('projects', transformedProjects);
+  return transformedProjects;
 }
 
 export async function fetchSkills() {
-  try {
-    // Check for cached data first
-    if (typeof window !== 'undefined') {
-      const cachedData = localStorage.getItem('portfolio-skills');
-      const cacheTimestamp = localStorage.getItem('portfolio-skills-timestamp');
-      const now = Date.now();
-      
-      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp)) < CACHE_DURATION) {
-        return JSON.parse(cachedData);
-      }
-    }
-    
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
-    
-    const response = await fetch(`${API_BASE_URL}/skills`, {
-      signal: controller.signal,
-      headers: {
-        'Cache-Control': 'no-cache',
-      }
-    });
-    
-    clearTimeout(timeoutId);
-    
-    if (!response.ok) {
-      throw new Error(`Failed to fetch skills: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    
-    // Cache the data (only in browser)
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('portfolio-skills', JSON.stringify(data));
-      localStorage.setItem('portfolio-skills-timestamp', Date.now().toString());
-    }
-    
-    return data;
-  } catch (err) {
-    if (err.name === 'AbortError') {
-      throw new Error('Request timed out. Please check your connection.');
-    }
-    throw err;
+  const cached = readCache('skills');
+  if (cached) return cached;
+
+  const response = await fetchWithTimeout(`${API_BASE_URL}/skills`);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch skills: ${response.status}`);
   }
+
+  const data = await response.json();
+  writeCache('skills', data);
+  return data;
 }
 
 export async function fetchCertifications() {
-  try {
-    if (typeof window !== 'undefined') {
-      const cachedData = localStorage.getItem('portfolio-certifications');
-      const cacheTimestamp = localStorage.getItem('portfolio-certifications-timestamp');
-      const now = Date.now();
+  const cached = readCache('certifications');
+  if (cached) return cached;
 
-      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp)) < CACHE_DURATION) {
-        return JSON.parse(cachedData);
-      }
-    }
+  const response = await fetchWithTimeout(`${API_BASE_URL}/certifications`);
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-    const response = await fetch(`${API_BASE_URL}/certifications`, {
-      signal: controller.signal,
-      headers: {
-        'Cache-Control': 'no-cache',
-      }
-    });
-
-    clearTimeout(timeoutId);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch certifications: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('portfolio-certifications', JSON.stringify(data));
-      localStorage.setItem('portfolio-certifications-timestamp', Date.now().toString());
-    }
-
-    return data;
-  } catch (err) {
-    if (err.name === 'AbortError') {
-      throw new Error('Request timed out. Please check your connection.');
-    }
-    throw err;
+  if (!response.ok) {
+    throw new Error(`Failed to fetch certifications: ${response.status}`);
   }
+
+  const data = await response.json();
+  writeCache('certifications', data);
+  return data;
 }
 
 // Pre-load function for initial page load
@@ -159,7 +120,7 @@ export async function preloadData() {
   const results = await Promise.allSettled([
     fetchProjects(),
     fetchSkills(),
-    fetchCertifications()
+    fetchCertifications(),
   ]);
 
   return {

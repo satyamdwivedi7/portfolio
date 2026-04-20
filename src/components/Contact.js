@@ -83,15 +83,30 @@ export default function Contact() {
     }
   };
 
-  const getColorClass = (color, type = 'text') => {
-    const colors = {
-      'neon-cyan': type === 'text' ? 'text-neon-cyan' : type === 'border' ? 'border-neon-cyan' : 'bg-neon-cyan/20',
-      'neon-purple': type === 'text' ? 'text-neon-purple' : type === 'border' ? 'border-neon-purple' : 'bg-neon-purple/20',
-      'neon-pink': type === 'text' ? 'text-neon-pink' : type === 'border' ? 'border-neon-pink' : 'bg-neon-pink/20',
-      'neon-green': type === 'text' ? 'text-neon-green' : type === 'border' ? 'border-neon-green' : 'bg-neon-green/20',
-    };
-    return colors[color] || colors['neon-cyan'];
+  // Static, Tailwind-safe class maps — never build class names dynamically
+  // so the purger can always find these strings.
+  const textColorMap = {
+    'neon-cyan':   'text-neon-cyan',
+    'neon-purple': 'text-neon-purple',
+    'neon-pink':   'text-neon-pink',
+    'neon-green':  'text-neon-green',
   };
+  const borderColorMap = {
+    'neon-cyan':   'border-neon-cyan',
+    'neon-purple': 'border-neon-purple',
+    'neon-pink':   'border-neon-pink',
+    'neon-green':  'border-neon-green',
+  };
+  const bgColorMap = {
+    'neon-cyan':   'bg-neon-cyan/20',
+    'neon-purple': 'bg-neon-purple/20',
+    'neon-pink':   'bg-neon-pink/20',
+    'neon-green':  'bg-neon-green/20',
+  };
+
+  const getTextColor   = (color) => textColorMap[color]   || textColorMap['neon-cyan'];
+  const getBorderColor = (color) => borderColorMap[color] || borderColorMap['neon-cyan'];
+  const getBgColor     = (color) => bgColorMap[color]     || bgColorMap['neon-cyan'];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -163,12 +178,12 @@ export default function Contact() {
                     whileTap={{ scale: 0.98 }}
                     className="flex items-center space-x-4 p-6 rounded-xl glass hover:bg-dark-800/70 transition-all duration-300 group hoverable"
                   >
-                    <div className={`p-3 rounded-lg ${getColorClass(method.color, 'bg')} group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon size={24} className={getColorClass(method.color)} />
+                    <div className={`p-3 rounded-lg ${getBgColor(method.color)} group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon size={24} className={getTextColor(method.color)} />
                     </div>
                     <div className="min-w-0">
                       <h4 className="text-white font-semibold mb-1">{method.label}</h4>
-                      <p className={`${getColorClass(method.color)} font-medium break-all`}>{method.value}</p>
+                      <p className={`${getTextColor(method.color)} font-medium break-all`}>{method.value}</p>
                     </div>
                   </motion.a>
                 );
@@ -179,19 +194,29 @@ export default function Contact() {
             <motion.div variants={itemVariants} className="pt-8">
               <h4 className="text-white font-semibold mb-4">Follow Me</h4>
               <div className="flex space-x-4">
-                {socialLinks.map(({ icon: Icon, href, label, color }) => (
-                  <motion.a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="p-3 rounded-xl glass hover:bg-dark-800/70 transition-all duration-300 group hoverable"
-                  >
-                    <Icon size={24} className={`text-gray-400 group-hover:${getColorClass(color)} transition-colors duration-300`} />
-                  </motion.a>
-                ))}
+                {socialLinks.map(({ icon: Icon, href, label, color }) => {
+                  // Static hover color map — Tailwind purger requires full static strings
+                  const hoverColorMap = {
+                    'neon-cyan':   'group-hover:text-neon-cyan',
+                    'neon-purple': 'group-hover:text-neon-purple',
+                    'neon-pink':   'group-hover:text-neon-pink',
+                    'neon-green':  'group-hover:text-neon-green',
+                  };
+                  const hoverColor = hoverColorMap[color] || hoverColorMap['neon-cyan'];
+                  return (
+                    <motion.a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -5 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-3 rounded-xl glass hover:bg-dark-800/70 transition-all duration-300 group hoverable"
+                    >
+                      <Icon size={24} className={`text-gray-400 ${hoverColor} transition-colors duration-300`} />
+                    </motion.a>
+                  );
+                })}
               </div>
             </motion.div>
           </motion.div>
