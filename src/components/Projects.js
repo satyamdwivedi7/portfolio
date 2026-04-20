@@ -235,7 +235,7 @@ export default function Projects() {
         )}
 
         {/* Projects Display - Always render container */}
-        {!loading && !error && (
+        {!loading && (
           <div className="mb-16">
             {displayedProjects.length > 0 ? (
               <>
