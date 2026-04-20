@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Play, X, Loader2, Eye } from 'lucide-react';
 import { GithubIcon } from '@/components/SocialIcons';
